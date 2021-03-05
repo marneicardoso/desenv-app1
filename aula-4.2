@@ -1,0 +1,46 @@
+
+public class Pessoa {
+
+	// Atributos da Classe (variáveis)
+	public String nome;
+	public int idade;
+	public String email;
+	
+	// Métodos (ações)
+	public void falar(String mensagem) {
+		// Mostra uma mesg de boas-vindas
+		System.out.println(mensagem);
+		
+		// JOPtionPane
+	}
+	
+	public String comer() {
+		// Pergunta o que a pessoa comeu
+		return null;
+	}
+}
+
+
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		// Cria um objeto da classe Pessoa
+		Pessoa p = new Pessoa();
+		
+		// Preenche os dados da pessoa
+		p.nome = "Marnei";
+		p.idade = 43;
+		p.email = "prof.marneicardoso@gmail.com";
+		
+		// Mostra a mensagem de boas-vindas
+		p.falar("Bem-vindo(a) " + p.nome);
+		p.falar("E-mail: " + p.email);
+		p.falar("Idade: " + p.idade);
+		
+		// Cria uma variável para receber a resposta
+		
+		// Mostra a resposta
+	}
+}
