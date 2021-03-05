@@ -1,0 +1,122 @@
+Aula #2
+
+Lógica de Programação e Algoritmos em Java
+
+Conceito de Lógica de Programação:
+Uso do raciocínio.
+Forma de pensar e resolver problemas.
+
+
+Exemplos:
+
+Se
+ A é igual a B
+e 
+ B é igual a C
+então
+ C é igual a A
+
+
+Todo mamífero é um animal.
+O cachorro é mamífero.
+Logo, o cachorro é um animal.
+
+
+Conceito de Algoritmos:
+Sequência de passos lógicos para resolver um problema.
+
+Exemplo:
+
+Algoritmo para escovar os dentes.
+
+Ir até o banheiro
+Pegar a escova
+Pegar o creme dental
+Passar creme dental na escova
+Escovar os dentes
+Enxaguar a boca
+Secar a boa
+Guardar a escova
+Guardar o creme dental
+Sair do banheiro
+
+O exemplo acima é um algoritmo (sequência de passos) para resolver um problema comum diário, podendo ter algumas variações. No entanto a ideia é elaborar os passos de forma lógica, ou seja, não podemos alterar a ordem de alguns passos, tendo o risco de não obter o resultado esperado.
+Vamos pensar: O passo "7. Secar a boca" não tem lógica ser executado antes do passo "6. Enxaguar a boca", porque não terá utilidade nenhuma e o passo deverá ser repetido, desperdiçando tempo.
+
+Um simples "secar a boca" pode parecer um passo simples e se tiver que ser repetido, não fará muita diferença. Porém se pensarmos em procedimentos que exigem muito processamento e que seja repetido várias e várias vezes, não acha que o sistema se tornará mais lento?
+
+
+Operadores: Aritméticos, Relacionais e Lógicos
+
+Variáveis e tipos (primitivos e wrappers)
+
+
+Exercícios de fixação
+
+Crie um algoritmo para tomar banho.
+
+Crie um algoritmo para ir até o mercado comprar uma lâmpada.
+
+Crie um algoritmo para trocar uma lâmpada.
+
+-----
+CÓDIGOS JAVA
+
+public class PrimeiroAppJava {
+
+	public static void main(String[] args) {
+
+		/*
+		 * O que são variáveis?
+		 * 
+		 * Um espaço reservado na memória para guardar valores temporários.
+		 */
+
+		// Variáveis em Java
+
+		// Como declarar uma variável
+		// TIPO NOME VALOR
+		int num1 = 3;
+		int num2 = 5;
+
+		int soma;
+
+		soma = num1 + num2;
+		
+		System.out.println(soma);
+
+		// Formatar o código: Ctrl + Shift + F
+		
+		/* TIPOS PRIMITVOS
+			int		== Inteiro	(5, 3, 23)
+			double	== Decimal	(0.25, 1.75)
+			char	== Caracter	('a', 'A', 'm')
+			bool	== Booleano	(true, false)
+		*/
+		
+		/* TIPO WRAPPER (são Classes)
+		 	Integer == Inteiro	(5, 3, 23)
+		 	Double	== Decimal	(0.25, 1.75)
+		 	String	== Cadeia de Caracteres (texto)	("a", "Ana", "m", "Maria, 52")
+		 	Boolean	== Booleano	(true, false)
+		*/
+		
+		boolean ligado = true;
+		int numero = 23;
+		double valor = 2.15;
+		String nome = "Marnei";
+		
+		// Convertendo um texto em número
+		String numeroEmTexto = "5";
+		int numero1 = Integer.parseInt(numeroEmTexto);
+		int numero2 = 16;
+		
+		soma = numero1 + numero2;
+		
+		System.out.println("O resultado da soma é: " + soma);
+		// Atalho para o System.out.println() é syso (Ctrl + Espaço)
+	}
+}
+
+
+
