@@ -1,0 +1,79 @@
+
+public class Calculadora {
+
+	// Método de Adição
+	public void somar(double valor1, double valor2) {
+		// Cálculo (PROCESSAMENTO)
+		double resultado = valor1 + valor2;
+
+		// Mostra o resultado na tela (SAÍDA)
+		System.out.println("A soma é: " + resultado);
+		//System.out.println("A soma de " + valor1 + " + " + valor2 + " é: " + resultado);
+	}
+
+	// Método de Subtração
+	public void subtrair(double valor1, double valor2) {
+		// Cálculo (PROCESSAMENTO)
+		double resultado = valor1 - valor2;
+
+		// Mostra o resultado na tela (SAÍDA)
+		System.out.println("A subtração é: " + resultado);
+	}
+
+	// Método de Multiplicação
+	public void multiplicar(double valor1, double valor2) {
+		// Cálculo (PROCESSAMENTO)
+		double resultado = valor1 * valor2;
+
+		// Mostra o resultado na tela (SAÍDA)
+		System.out.println("A multiplicação é: " + resultado);
+	}
+
+	// Método de Divisão
+	public void dividir(double valor1, double valor2) {
+		// Cálculo (PROCESSAMENTO)
+		double resultado = valor1 / valor2;
+
+		// Mostra o resultado na tela (SAÍDA)
+		System.out.println("A divisão é: " + resultado);
+	}
+}
+
+
+
+
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// :: Programação Orientada a Objetos ::
+
+		// 1. Declaração das Variáveis
+		double n1;
+		double n2;
+
+		// Cria os objetos das classes
+		Scanner input = new Scanner(System.in);
+		Calculadora calc = new Calculadora();
+
+		// 2. Atribuição e valores (ENTRADA)
+		System.out.println("Informe o primeiro valor");
+		n1 = input.nextDouble();
+		
+		System.out.println("Informe o segundo valor");
+		n2 = input.nextDouble();
+
+		// 3. Chama o método para efetuar o cálculo
+		calc.somar(n1, n2);
+		
+		calc.subtrair(n1, n2);
+		
+		calc.multiplicar(n1, n2);
+		
+		calc.dividir(n1, n2);
+	}
+}
+
+
