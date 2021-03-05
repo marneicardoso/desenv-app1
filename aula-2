@@ -87,7 +87,7 @@ public class PrimeiroAppJava {
 
 		// Formatar o código: Ctrl + Shift + F
 		
-		/* TIPOS PRIMITIVOS
+		/* TIPOS PRIMITVOS
 			int		== Inteiro	(5, 3, 23)
 			double	== Decimal	(0.25, 1.75)
 			char	== Caracter	('a', 'A', 'm')
