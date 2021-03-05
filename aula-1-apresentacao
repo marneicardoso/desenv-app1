@@ -1,0 +1,73 @@
+Aula #1
+
+Apresentação da Disciplina | Desenvolvimento de Aplicativos I
+
+1. Formato das Aulas:
+
+Aula Remota (ao vivo)
+19:00 às 20:30
+Intervalo de 15 minutos
+20:45 às 22:00
+
+Grupo do Whats
+Recados e dúvidas
+
+Discord
+Presença (chamada)
+Códigos
+Imagens
+Compartilhamento de Tela
+
+Classroom (Google Sala de Aula)
+Material das Aulas
+Trabalhos
+
+YouTube
+Aulas gravadas
+Continuam disponíveis
+Separadas por aula e assunto
+
+
+2. O que conta como presença:
+
+Classroom
+Presença online (Discord)
+Participação nas aulas
+
+
+3. Linguagem de Programação Java
+
+História da linguagem
+Sun Microsystems
+Project Oak (Carvalho)
+"Write once, run everywhere" 
+("Escreva uma vez, rode em qualquer lugar")
+Virtual Machine (Máquina Virtual)
+
+
+Diferenças entre o JDK e o JRE
+JDK: SDK do Java (Software Development Kit).
+JRE: Java Runtime Environment (Ambiente de Tempo de Execução) ou Máquina Virtual. É a plataforma para rodar aplicações em Java, como alguns aplicativos dos bancos.
+
+Baixando e Instalando o Java
+Google: java sdk
+ou
+Opção 2: https://bit.ly/2KFJRxi
+
+O que é uma IDE?
+Integrated Development Environment ou Ambiente de Desenvolvimento Integrado, e serve para:
+Codificação (assim como o Visual Studio Code)
+Compilação
+Resultado
+
+Qual IDE usar?
+Netbeans (acadêmico)
+Eclipse  (trabalhar)
+Intellij (está bem em alta)
+
+Baixando e Instalando o Eclipse IDE
+Google: eclipse ide (eclipse.org) > Download
+ou
+Opção 2: https://bit.ly/2KEtrFv
+
+
