@@ -1,3 +1,4 @@
+import javax.swing.JOptionPane;
 
 public class Pessoa {
 
@@ -11,15 +12,15 @@ public class Pessoa {
 		// Mostra uma mensagem de boas-vindas
 		System.out.println(mensagem);
 		
-		// JOPtionPane
+		// JOptionPane
+		JOptionPane.showMessageDialog(null, mensagem);
 	}
 	
 	public String comer() {
 		// Pergunta o que a pessoa comeu
-		return null;
+		return JOptionPane.showInputDialog("O que tu comeu no almoço?");
 	}
 }
-
 
 
 
@@ -40,7 +41,9 @@ public class Main {
 		p.falar("Idade: " + p.idade);
 		
 		// Cria uma variável para receber a resposta
+		String comida = p.comer();
 		
 		// Mostra a resposta
+		p.falar("Almoço: " + comida);
 	}
 }
