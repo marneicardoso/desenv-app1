@@ -53,4 +53,35 @@ public class Tela {
 
 
 
+public class Main {
+
+	public static void main(String[] args) {
+		// Cria um objeto da classe Tela
+		Tela tela = new Tela();
+		
+		// 0. Exemplo básico
+		//tela.mostrar();
+		
+		// 1. Mostrar Mensagem
+		String mensagem = "Hello World!";
+		String titulo = "Título da janela";
+		int numeroIcone = 1;
+		
+		tela.mostrarMensagem(mensagem, titulo, numeroIcone);
+		tela.mostrarMensagem("Mensagem manual", "Título manual", 0);
+		
+		// 2. Cadastrar Contato
+		String nome = tela.informarDados("nome");
+		String email = tela.informarDados("e-mail");
+		String idade = tela.informarDados("idade");
+		
+		tela.mostrarMensagem(nome, "Nome", 2);
+		tela.mostrarMensagem(email, "E-mail", 2);
+		tela.mostrarMensagem(idade, "Idade", 0);
+		
+		// 3. Confirmar Sair
+		tela.confirmarSair();
+	}
+}
+
 
