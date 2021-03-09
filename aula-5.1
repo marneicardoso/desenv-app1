@@ -1,0 +1,56 @@
+import javax.swing.JOptionPane;
+
+public class Tela {
+
+	// 0. Exemplo básico
+	public void mostrar() {
+		JOptionPane.showMessageDialog(null, "PLAIN_MESSAGE", "Título -1", -1);
+		JOptionPane.showMessageDialog(null, "ERROR_MESSAGE", "Título 0", 0);
+		JOptionPane.showMessageDialog(null, "INFORMATION_MESSAGE", "Título 1", 1);
+		JOptionPane.showMessageDialog(null, "WARNING_MESSAGE", "Título 2", 2);
+		JOptionPane.showMessageDialog(null, "QUESTION_MESSAGE", "Título 3", 3);
+		// (null, "A mensagem em si", "Título da janela", ícone)
+		
+		/* Lista de ÍCONES
+
+        -1. PLAIN_MESSAGE
+        0. ERROR_MESSAGE
+        1. INFORMATION_MESSAGE
+        2. WARNING_MESSAGE 
+        3. QUESTION_MESSAGE */
+	}
+	
+	// 1. Mostrar Mensagem
+	public void mostrarMensagem(String mensagem, String titulo, int numIcone) {
+		JOptionPane.showMessageDialog(null, mensagem, titulo, numIcone);
+	}
+	
+	// 2. Cadastrar Contato
+	public String informarDados(String campo) {
+		String dados = JOptionPane.showInputDialog(
+				null,
+				"Informe o " + campo,	// Mensagem
+				"Cadastrar Contato",	// Título
+				1);	// Ícone
+		
+		return dados;
+	}
+	
+	// 3. Confirmar Sair
+	public void confirmarSair() {
+		int sair = JOptionPane.showConfirmDialog(
+				null,
+				"Tem certeza?",				// Mensagem
+				"Fechar Sistema",			// Título
+				JOptionPane.YES_NO_OPTION,	// Confirmação
+				3);	// Ícone
+		
+		// Sim == 0
+		// Não == 1
+	}
+}
+
+
+
+
+
