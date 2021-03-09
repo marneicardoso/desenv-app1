@@ -17,3 +17,32 @@ public class Tela {
 }
 
 
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		// 1. Declaração das variáveis
+		Tela tela = new Tela();
+		double valor1, valor2, resultado;
+		
+		// 2. Atribuição de valores (ENTRADA)
+		String valor = tela.input();
+		valor1 = Double.parseDouble(valor);
+		
+		valor2 = Double.parseDouble(tela.input());
+		// Duas formas de receber o valor e converter
+		
+		// 3. Cálculo (PROCESSAMENTO)
+		resultado = valor1 + valor2;
+		
+		// 4. Mostra o resultado
+		tela.output(resultado);
+		
+		// Visibilidade (Public e Private)
+		tela.tamanho = 5.5;
+		tela.marca = "Xiaomi"; // Não pode ser acessado porque está Private
+		
+		tela.output(tela.tamanho);
+	}
+}
