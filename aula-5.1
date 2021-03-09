@@ -37,7 +37,7 @@ public class Tela {
 	}
 	
 	// 3. Confirmar Sair
-	public void confirmarSair() {
+	public int confirmarSair() {
 		int sair = JOptionPane.showConfirmDialog(
 				null,
 				"Tem certeza?",				// Mensagem
@@ -47,9 +47,10 @@ public class Tela {
 		
 		// Sim == 0
 		// Não == 1
+		
+		return sair;
 	}
 }
-
 
 
 
@@ -80,8 +81,8 @@ public class Main {
 		tela.mostrarMensagem(idade, "Idade", 0);
 		
 		// 3. Confirmar Sair
-		tela.confirmarSair();
+		Integer sair = tela.confirmarSair();
+		
+		tela.mostrarMensagem(sair.toString(), "Saindo?", 3);
 	}
 }
-
-
