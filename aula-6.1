@@ -1,5 +1,23 @@
 import javax.swing.JOptionPane;
 
+// Versão 2: Formato atualizado, com variáveis Wrapper (Classes)
+public class Tela {
+
+	// Atributos (variáveis)
+	public Double tamanho;
+	public String marca;
+	
+	// Métodos
+	public String input() {
+		return JOptionPane.showInputDialog("Informe um número");
+	}
+	
+	public void output(String resultado) {
+		JOptionPane.showMessageDialog(null, resultado);
+	}
+}
+
+/* // Versão 1: Formato anterior, com variáveis primitivas
 public class Tela {
 
 	// Atributos (variáveis)
@@ -15,9 +33,42 @@ public class Tela {
 		JOptionPane.showMessageDialog(null, resultado);
 	}
 }
+*/
 
 
+// Versão 2: Formato atualizado, com variáveis Wrapper (Classes)
+public class Main {
 
+	public static void main(String[] args) {
+		
+		// 1. Declaração das variáveis
+		Tela tela = new Tela();
+		Double valor1, valor2, resultado;
+		
+		// 2. Atribuição de valores (ENTRADA)
+		String valor = tela.input();
+		valor1 = Double.parseDouble(valor);
+		
+		valor2 = Double.parseDouble(tela.input());
+		// Duas formas de receber o valor e converter
+		
+		// 3. Cálculo (PROCESSAMENTO)
+		resultado = valor1 + valor2;
+		
+		// 4. Mostra o resultado
+		tela.output(resultado.toString());
+		
+		// Visibilidade (Public e Private)
+		tela.tamanho = 5.5;
+		tela.marca = "Xiaomi"; // Não pode ser acessado porque está Private
+		
+		tela.output(tela.tamanho.toString());
+		tela.output(tela.marca);
+	}
+}
+
+
+/* // Versão 1: Formato anterior, com variáveis primitivas
 public class Main {
 
 	public static void main(String[] args) {
@@ -46,3 +97,4 @@ public class Main {
 		tela.output(tela.tamanho);
 	}
 }
+*/
