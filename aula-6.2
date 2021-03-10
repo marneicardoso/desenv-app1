@@ -1,3 +1,17 @@
+import javax.swing.JOptionPane;
+
+public class Tela {
+
+	public String pegarDados(String campo) {
+		return JOptionPane.showInputDialog("Informe " + campo);
+	}
+	
+	public void mostrarDados(String mensagem) {
+		JOptionPane.showMessageDialog(null, mensagem);
+	}
+}
+
+
 
 
 public class Pessoa {
@@ -89,19 +103,29 @@ public class Pessoa {
 
 
 
+
 public class Main {
 
 	public static void main(String[] args) {
-		// Cria um objeto da classe Pessoa
-		Pessoa p1 = new Pessoa();
-		Pessoa p2 = new Pessoa("Ana");
-		Pessoa p3 = new Pessoa("Maria", 17, 63.5);
 		
-				
-		p1.setNome("Pedro");
+		// Cria um Objeto da classe Tela
+		Tela tela = new Tela();
+		
+		// Usuário informa os dados
+		String nome = tela.pegarDados("o nome");
+		int idade = Integer.parseInt(tela.pegarDados("a idade"));
+		double peso = Double.parseDouble(tela.pegarDados("o peso"));
+		
+		// Cria um objeto da classe Pessoa
+		/*Pessoa p1 = new Pessoa();
+		Pessoa p2 = new Pessoa("Ana");
+		Pessoa p3 = new Pessoa("Maria", 17, 63.5);*/
+		Pessoa p3 = new Pessoa(nome, idade, peso);
+		
+		/*p1.setNome("Pedro");
 		System.out.println(p1.getNome());
 		
-		System.out.println(p2.getNome());
+		System.out.println(p2.getNome());*/
 		
 		System.out.println(
 				"Nome: " + p3.getNome() +
@@ -117,3 +141,5 @@ public class Main {
 		System.out.println("Pode dirigir? " + p3.dirigir());
 	}
 }
+
+
