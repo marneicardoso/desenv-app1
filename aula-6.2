@@ -1,4 +1,5 @@
 
+
 public class Pessoa {
 
 	// Atributos (propriedades da classe)
@@ -36,18 +37,23 @@ public class Pessoa {
 			podeVotar = false;
 		
 		} else if (this.idade >= 18 && this.idade < 65) {
-			System.out.println("Voto obrigatório.");
+			System.out.println("Voto obrigatório");
 			podeVotar = true;
 		
+		// if else (this.idade >= 16 && this.idade < 18 || this.idade > 64) {
 		} else {
 			System.out.println("Voto opcional.");
 			podeVotar = true;
-		}
+		}	
 		
 		return podeVotar;
 	}
 
 	public Boolean dirigir() {
+		// Verifica se a idade é maior ou igual a 18
+		if (this.idade >= 18) {
+			return true;
+		}
 		
 		return false;
 	}
@@ -89,7 +95,7 @@ public class Main {
 		// Cria um objeto da classe Pessoa
 		Pessoa p1 = new Pessoa();
 		Pessoa p2 = new Pessoa("Ana");
-		Pessoa p3 = new Pessoa("Maria", 52, 63.5);
+		Pessoa p3 = new Pessoa("Maria", 17, 63.5);
 		
 				
 		p1.setNome("Pedro");
@@ -105,7 +111,9 @@ public class Main {
 		
 		// Votar
 		boolean voto = p3.votar();
-		
 		System.out.println("Pode votar? " + voto);
+		
+		// Dirigir
+		System.out.println("Pode dirigir? " + p3.dirigir());
 	}
 }
