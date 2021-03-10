@@ -31,8 +31,17 @@ public class Pessoa {
 		// ESTRUTURA CONDICIONAL SE SENÃO (IF ELSE)
 		
 		// Verifica se a idade é maior ou igual a 16
-		if (this.idade >= 18) {
-			System.out.println("Pode votar");
+		if (this.idade < 16) {
+			System.out.println("Não é permitido.");
+			podeVotar = false;
+		
+		} else if (this.idade >= 18 && this.idade < 65) {
+			System.out.println("Voto obrigatório.");
+			podeVotar = true;
+		
+		} else {
+			System.out.println("Voto opcional.");
+			podeVotar = true;
 		}
 		
 		return podeVotar;
@@ -93,5 +102,10 @@ public class Main {
 				"\nIdade: " + p3.getIdade() +
 				"\nPeso: " + p3.getPeso()
 				);
+		
+		// Votar
+		boolean voto = p3.votar();
+		
+		System.out.println("Pode votar? " + voto);
 	}
 }
