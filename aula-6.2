@@ -1,0 +1,97 @@
+
+public class Pessoa {
+
+	// Atributos (propriedades da classe)
+	private String nome;
+	private Integer idade;
+	private Double peso;
+
+	// Construtor (vazio)
+	public Pessoa() {
+
+	}
+
+	// Construtor com 1 parâmetro
+	public Pessoa(String _nome) {
+		this.nome = _nome;
+	}
+
+	// Construtor com todos os parâmetros
+	public Pessoa(String _nome, Integer _idade, Double _peso) {
+		this.nome = _nome;
+		this.idade = _idade;
+		this.peso = _peso;
+	}
+
+	// Métodos
+	public Boolean votar() {
+		
+		boolean podeVotar = false;
+		
+		// ESTRUTURA CONDICIONAL SE SENÃO (IF ELSE)
+		
+		// Verifica se a idade é maior ou igual a 16
+		if (this.idade >= 18) {
+			System.out.println("Pode votar");
+		}
+		
+		return podeVotar;
+	}
+
+	public Boolean dirigir() {
+		
+		return false;
+	}
+
+	// Get == pegar
+	// Set == atribuir (verbo) | Set == conjunto (substantivo)
+
+	// Métodos Getter e Setter
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String _nome) {
+		this.nome = _nome;
+	}
+
+	public Integer getIdade() {
+		return idade;
+	}
+
+	public void setIdade(Integer _idade) {
+		this.idade = _idade;
+	}
+
+	public Double getPeso() {
+		return peso;
+	}
+
+	public void setPeso(Double _peso) {
+		this.peso = _peso;
+	}
+}
+
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		// Cria um objeto da classe Pessoa
+		Pessoa p1 = new Pessoa();
+		Pessoa p2 = new Pessoa("Ana");
+		Pessoa p3 = new Pessoa("Maria", 52, 63.5);
+		
+				
+		p1.setNome("Pedro");
+		System.out.println(p1.getNome());
+		
+		System.out.println(p2.getNome());
+		
+		System.out.println(
+				"Nome: " + p3.getNome() +
+				"\nIdade: " + p3.getIdade() +
+				"\nPeso: " + p3.getPeso()
+				);
+	}
+}
