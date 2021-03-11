@@ -1,0 +1,66 @@
+import javax.swing.JOptionPane;
+
+public class Regiao {
+
+	// Atributos
+	private String menu =
+			":: Informe a Região ::\n\n"
+			+ "1. Sul\n"
+			+ "2. Sudeste\n"
+			+ "3. Centro-Oeste\n"
+			+ "4. Nordeste\n"
+			+ "5. Norte\n"
+			+ "0. Sair\n\n"
+			+ "Informe uma das regiões\n\n";
+	
+	// Métodos
+	public void criarMenu() {
+		// Variável que recebe a região informada pelo usuário
+		String regiao = JOptionPane.showInputDialog(
+				null,
+				menu,	// Mensagem
+				"Regiões com Switch Case",
+				3);
+		
+		switch(regiao) {
+			case "0":
+				regiao = "Encerrando o sistema...";
+				break;
+				
+			case "1":
+				regiao = "Região escolhida: Sul";
+				break;
+				
+			case "2":
+				regiao = "Região escolhida: Sudeste";
+				break;
+				
+			case "3":
+				regiao = "Região escolhida: Centro-Oeste";
+				break;
+				
+			case "4":
+				regiao = "Região escolhida: Nordeste";
+				break;
+				
+			case "5":
+				regiao = "Região escolhida: Norte";
+				break;
+		}
+		
+		// Mostra a região escolhida
+		JOptionPane.showMessageDialog(null, regiao, "Região", 1);
+	}
+}
+
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		// Cria o objeto da classe Regiao
+		Regiao regiao = new Regiao();
+		
+		regiao.criarMenu();
+	}
+}
