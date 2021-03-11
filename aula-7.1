@@ -15,7 +15,7 @@ public class Animal {
 
 	// Métodos
 	public void emitirSom() {
-		System.out.println("Animal > som");
+		System.out.println("Animal > som padrão do animal");
 	}
 	
 	// Getters e Setters
@@ -57,5 +57,73 @@ public class Animal {
 
 	public void setIdade(int _idade) {
 		this.idade = _idade;
+	}
+}
+
+
+
+public class Cachorro extends Animal {
+
+	// Método vindo da Superclasse e sobrescrito
+	@Override
+	public void emitirSom() {
+		System.out.println("Cachorro > Au au");
+	}
+}
+
+
+
+public class Vaca extends Animal {
+
+	// Método vindo da Superclasse e sobrescrito
+	@Override
+	public void emitirSom() {
+		System.out.println("Vaca > Muuu");
+	}
+}
+
+
+
+public class Pato extends Animal {
+
+	// Método vindo da Superclasse e sobrescrito
+	@Override
+	public void emitirSom() {
+		System.out.println("Pato > Qual é?");
+	}
+}
+
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		// Cria um objeto da classe Animal
+		/*Animal animal = new Animal();
+		
+		animal.setValor(225.0);
+		System.out.println("Animal > preço: " + animal.getValor());
+		animal.emitirSom();*/
+		
+		// Duas formas de manipular os dados herdados
+		Animal cachorro1 = new Cachorro();
+		cachorro1.setValor(150.0);
+		System.out.println("Animal > preço: " + cachorro1.getValor());
+		cachorro1.emitirSom();
+		
+		Cachorro cachorro2 = new Cachorro();
+		cachorro2.setValor(350.0);
+		System.out.println("Animal > preço: " + cachorro2.getValor());
+		cachorro2.emitirSom();
+		
+		Vaca vaca = new Vaca();
+		vaca.setEspecie("Jersey");
+		System.out.println("Vaca > raça: " + vaca.getEspecie());
+		vaca.emitirSom();
+		
+		Animal pato = new Pato();
+		pato.setIdade(3000);
+		System.out.println("Pato > idade: " + pato.getIdade());
+		pato.emitirSom();
 	}
 }
