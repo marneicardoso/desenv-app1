@@ -12,42 +12,81 @@ public class Regiao {
 			+ "5. Norte\n"
 			+ "0. Sair\n\n"
 			+ "Informe uma das regiões\n\n";
-	
+
 	// Métodos
-	public void criarMenu() {
+	public void criarMenuSwitch() {
 		// Variável que recebe a região informada pelo usuário
 		String regiao = JOptionPane.showInputDialog(
 				null,
-				menu,	// Mensagem
-				"Regiões com Switch Case",
+				menu, // Mensagem
+				"Regiões com Switch Case", // Título
 				3);
-		
-		switch(regiao) {
+
+		switch (regiao) {
 			case "0":
 				regiao = "Encerrando o sistema...";
 				break;
-				
+	
 			case "1":
 				regiao = "Região escolhida: Sul";
 				break;
-				
+	
 			case "2":
 				regiao = "Região escolhida: Sudeste";
 				break;
-				
+	
 			case "3":
 				regiao = "Região escolhida: Centro-Oeste";
 				break;
-				
+	
 			case "4":
 				regiao = "Região escolhida: Nordeste";
 				break;
-				
+	
 			case "5":
 				regiao = "Região escolhida: Norte";
 				break;
+	
+			default:
+				regiao = "Informe uma das opções do menu";
 		}
-		
+
+		// Mostra a região escolhida
+		JOptionPane.showMessageDialog(null, regiao, "Região", 1);
+
+	} // fecha o método criarMenuSwitch
+
+	public void criarMenuIF() {
+
+		String regiao = JOptionPane.showInputDialog(
+				null,
+				menu, // Mensagem
+				"Regiões com IF Else",  // Título
+				2);
+
+		if (regiao.equals("0")) {
+			regiao = "Encerrando o sistema...";
+
+			// if (regiao == "1")
+		} else if (regiao.equals("1")) {
+			regiao = "Região escolhida: Sul";
+
+		} else if (regiao.equals("2")) {
+			regiao = "Região escolhida: Sudeste";
+
+		} else if (regiao.equals("3")) {
+			regiao = "Região escolhida: Centro-Oeste";
+
+		} else if (regiao.equals("4")) {
+			regiao = "Região escolhida: Nordeste";
+
+		} else if (regiao.equals("5")) {
+			regiao = "Região escolhida: Norte";
+
+		} else {
+			regiao = "Informe uma das opções do menu";
+		}
+
 		// Mostra a região escolhida
 		JOptionPane.showMessageDialog(null, regiao, "Região", 1);
 	}
@@ -61,6 +100,8 @@ public class Main {
 		// Cria o objeto da classe Regiao
 		Regiao regiao = new Regiao();
 		
-		regiao.criarMenu();
+		regiao.criarMenuSwitch();
+		
+		regiao.criarMenuIF();
 	}
 }
