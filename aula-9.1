@@ -31,3 +31,26 @@ public class Tela {
 }
 
 
+
+public class Consorcio {
+	
+	// Métodos
+	public void mostrarSaldoDevedor() {
+		Tela tela = new Tela();
+		String valor = tela.receberDado("Informe o número total de parcelas");
+		int numeroTotalParcelas = Integer.parseInt(valor);
+		
+		valor = tela.receberDado("Informe a quantidade de parcelas pagas");
+		int quantidadeParcelasPagas = Integer.parseInt(valor);
+		
+		valor = tela.receberDado("informe o valor da parcela");
+		double valorParcela = Double.parseDouble(valor);
+		
+		// Valor total do consórcio
+		Double valorTotalConsorcio = valorParcela * numeroTotalParcelas;
+		Double valorTotalPago = quantidadeParcelasPagas * valorParcela;
+		Double saldoDevedor = valorTotalConsorcio - valorTotalPago;
+		
+		tela.mostrarMensagem("O saldo devedor é R$ " + saldoDevedor);
+	}
+}
