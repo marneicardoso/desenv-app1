@@ -19,14 +19,12 @@ public class Contador {
 		String valorInformado = JOptionPane.showInputDialog(
 				null,
 				"Informe um valor",	/* Mensagem */
-				"Contador WHILE",		/* Título */
+				"Contador WHILE",	/* Título */
 				3);
-		
-		int valor;
 		
 		try {
 			// Tenta converter o valorInformado (Texto) para Inteiro
-			valor = Integer.parseInt(valorInformado);
+			int valor = Integer.parseInt(valorInformado);
 			
 			// Contador
 			int cont = 1;
@@ -48,21 +46,18 @@ public class Contador {
 			JOptionPane.showMessageDialog(null, "Informe apenas números");
 		}
 		
-		
 	} // fecha o método contadorWhile
 	
 	public void contadorFor() {
 		String valorInformado = JOptionPane.showInputDialog(
 				null,
 				"Informe um valor",	/* Mensagem */
-				"Contador FOR",		/* Título */
+				"Contador FOR",	/* Título */
 				3);
-		
-		int valor;
 		
 		try {
 			// Tenta converter o valorInformado (Texto) para Inteiro
-			valor = Integer.parseInt(valorInformado);
+			int valor = Integer.parseInt(valorInformado);
 			System.out.println("\n");
 			
 			for (int cont = 1; cont <= valor; cont++) {
@@ -74,7 +69,7 @@ public class Contador {
 					System.out.print(cont + ".");
 				}
 			}
-			
+		
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Informe apenas números");
 		}
