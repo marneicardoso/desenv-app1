@@ -8,3 +8,76 @@ public class Main {
 		contador.contadorFor();
 	}
 }
+
+
+
+import javax.swing.JOptionPane;
+
+public class Contador {
+
+	public void contadorWhile() {
+		String valorInformado = JOptionPane.showInputDialog(
+				null,
+				"Informe um valor",	/* Mensagem */
+				"Contador WHILE",		/* Título */
+				3);
+		
+		int valor;
+		
+		try {
+			// Tenta converter o valorInformado (Texto) para Inteiro
+			valor = Integer.parseInt(valorInformado);
+			
+			// Contador
+			int cont = 1;
+			
+			while (cont <= valor) {
+				
+				if (cont < valor) {
+					System.out.print(cont + ", ");
+				
+				} else {
+					System.out.print(cont + ".");
+				}
+				
+				cont++;
+				// cont = cont + 1; // o mesmo que acima
+			}
+		
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Informe apenas números");
+		}
+		
+		
+	} // fecha o método contadorWhile
+	
+	public void contadorFor() {
+		String valorInformado = JOptionPane.showInputDialog(
+				null,
+				"Informe um valor",	/* Mensagem */
+				"Contador FOR",		/* Título */
+				3);
+		
+		int valor;
+		
+		try {
+			// Tenta converter o valorInformado (Texto) para Inteiro
+			valor = Integer.parseInt(valorInformado);
+			System.out.println("\n");
+			
+			for (int cont = 1; cont <= valor; cont++) {
+				
+				if (cont < valor) {
+					System.out.print(cont + ", ");
+				
+				} else {
+					System.out.print(cont + ".");
+				}
+			}
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Informe apenas números");
+		}
+		
+	} // fecha o método contadorFor
+}
