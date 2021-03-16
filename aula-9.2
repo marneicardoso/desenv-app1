@@ -1,13 +1,114 @@
-// Calcular
-public void calcular() { // FAÇADE (Padrão de Projeto - Design Pattern)
+
+public class Main {
+
+	public static void main(String[] args) {
+		Calculadora calculadora = new Calculadora();
+		calculadora.calcular();
+	}
+}
+
+
+
+import javax.swing.JOptionPane;
+
+public class Tela {
+
+	public String receberDado(String mensagem, String titulo, int icone) {
+		return JOptionPane.showInputDialog(null, mensagem, titulo, icone);
+	}
+	
+	public void mostrarMensagem(String mensagem, String titulo, int icone) {
+		JOptionPane.showMessageDialog(null, mensagem, titulo, icone);
+	}
+}
+
+
+
+public class Calculadora {
+
+	// Calcular
+	public void calcular() { // FAÇADE (Padrão de Projeto - Design Pattern)
 		
 		String menu =
-				":: Calculadora ::\n\n"
-				+ "1. Adição\n"
+				"1. Adição\n"
 				+ "2. Subtração\n"
 				+ "3. Multiplicação\n"
 				+ "4. Divisão\n"
 				+ "0. Sair\n\n";
 		
 		boolean ativo = true;
+		Tela tela = new Tela();
+		
+		while (ativo) { // o mesmo que: while (ativo == true) {
+			// Monta o menu
+			String valor = tela.receberDado(menu, ":: Calculadora ::", -1);
+			
+			int operacao = 0;
+			
+			// Recebe a operação informada pelo usuário
+			try {
+				operacao = Integer.parseInt(valor);
+			
+			} catch (Exception e) {
+				tela.mostrarMensagem("Informe apenas números", "Atenção", 2);
+				e.printStackTrace();
+				return;
+			}
+			
+			double valor1 = 0;
+			double valor2 = 0;
+			
+			// Se a operação escolhida estiver entre 1 e 4 (opções do menu)
+			if (operacao >= 1 && operacao <= 4) {
+				valor = tela.receberDado("Informe o primeiro valor", "Informar valor", 3);
+				valor1 = Double.parseDouble(valor);
+				
+				valor = tela.receberDado("Informe o segundo valor", "Informar valor", 3);
+				valor2 = Double.parseDouble(valor);
+			}
+			
+			switch (operacao) {
+				
+				case 0:
+					tela.mostrarMensagem("Encerrando o sistema...", "Encerrando", 2);
+					ativo = false;
+					break;
+			
+				case 1:
+					tela.mostrarMensagem("O resultado é: " + somar(valor1, valor2), "Adição", 1);
+					break;
+					
+				case 2:
+					tela.mostrarMensagem("O resultado é: " + subtrair(valor1, valor2), "Subtração", 1);
+					break;
+					
+				case 3:
+					tela.mostrarMensagem("O resultado é: " + multiplicar(valor1, valor2), "Multiplicação", 1);
+					break;
+					
+				case 4:
+					tela.mostrarMensagem("O resultado é: " + dividir(valor1, valor2), "Divisão", 1);
+					break;
+					
+				default:
+					tela.mostrarMensagem("Informe uma das opções do menu", "Atenção", 0);
+			}
+		}
+	} // fecha o método calcular
+	
+	private Double somar(double _valor1, double _valor2) {
+		return _valor1 + _valor2;
+	}
+	
+	private Double subtrair(double _valor1, double _valor2) {
+		return _valor1 - _valor2;
+	}
+	
+	private Double multiplicar(double _valor1, double _valor2) {
+		return _valor1 * _valor2;
+	}
+	
+	private Double dividir(double _valor1, double _valor2) {
+		return _valor1 / _valor2;
+	}
 }
