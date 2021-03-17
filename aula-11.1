@@ -1,0 +1,66 @@
+import javax.swing.JOptionPane;
+
+public class Tela {
+
+	public void mostrarMensagem(String mensagem, String titulo, int icone) {
+		JOptionPane.showMessageDialog(
+				null,
+				mensagem,
+				titulo,
+				icone);
+	}
+	
+	public String receberDados(String mensagem, String titulo, int icone) {
+		return JOptionPane.showInputDialog(
+				null,
+				mensagem,
+				titulo,
+				icone);
+	}
+	
+	/*
+	public String receberNome() {
+		return JOptionPane.showInputDialog("Informe o nome");
+	}
+	
+	public String receberEmail() {
+		return JOptionPane.showInputDialog("Informe o e-mail");
+	}
+	
+	public String receberSenha() {
+		return JOptionPane.showInputDialog("Informe a senha");
+	}
+	*/
+}
+
+
+
+public class Lista {
+
+	public void cadastrar() {
+		Tela tela = new Tela();
+		
+		String titulo = "Cadastro";
+		int icone = 0;
+		
+		String nome = tela.receberDados("Informe o nome", titulo, icone);
+		String email = tela.receberDados("Informe o e-mail", titulo, icone);
+		String senha = tela.receberDados("Informe a senha", titulo, icone);
+		
+		/*
+		String nome = tela.receberNome();
+		String email = tela.receberEmail();
+		String senha = tela.receberSenha();
+		*/
+	}
+}
+
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		// Cria o objeto da classe Lista
+		Lista lista = new Lista();
+	}
+}
