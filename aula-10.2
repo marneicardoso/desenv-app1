@@ -1,0 +1,64 @@
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		Matriz matriz = new Matriz();
+		matriz.adicionarValor();
+	}
+}
+
+
+
+public class Matriz {
+
+	// Vetores e Matrizes em Java (Array)
+	
+	// Declara o Array e determina a quantidade de posições da variável
+	private int[] valor1 = new int[5];
+	
+	private int valor2[] = new int[5];
+	
+	private int valor3[] = { 5, 3 };
+	
+	public void adicionarValor() {
+		
+		// Preenche o Array
+		valor1[0] = 5;
+		valor1[3] = 8;
+		//valor1[5] = 7; // Fora do range (limite/escopo)
+		
+		System.out.println("Array valor1: "
+				+ valor1[0] + ", "
+				+ valor1[1] + ", "
+				+ valor1[2] + ", "
+				+ valor1[3] + ", "
+				+ valor1[4]);
+		
+		System.out.println("Array valor3: "
+				+ valor3[0] + ", "
+				+ valor3[1]);
+		
+		int valor4[] = new int[100];
+		
+		for (int cont = 0;cont < 100; cont++) {
+			
+			valor4[cont] = cont + 1;
+			
+			System.out.println(valor4[cont]);
+		}
+		
+		/*System.out.println(valor3[0]);
+		System.out.println(valor3[1]);
+		
+		valor3[1] = 8;
+		
+		System.out.println(valor3[0]);
+		System.out.println(valor3[1]);*/
+		
+		//valor3[2] = 7;
+		
+		//System.out.println(valor3[2]);
+	}
+}
+
