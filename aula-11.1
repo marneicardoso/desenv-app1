@@ -35,17 +35,40 @@ public class Tela {
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Lista {
 
 	public void cadastrar() {
 		Tela tela = new Tela();
 		
 		String titulo = "Cadastro";
-		int icone = 0;
+		int icone = 1;
 		
+		String nome = tela.receberDados("Informe o nome", titulo, icone);
+		
+		List<String> listaContato = new ArrayList<>();
+		listaContato.add(nome);
+		
+		tela.mostrarMensagem("Nome: " + listaContato.get(0), titulo, icone);
+		
+		//tela.mostrarMensagem("Nome: " + listaContato.get(1), titulo, icone);
+		
+		/*
 		String nome = tela.receberDados("Informe o nome", titulo, icone);
 		String email = tela.receberDados("Informe o e-mail", titulo, icone);
 		String senha = tela.receberDados("Informe a senha", titulo, icone);
+		
+		List<String> listaContato = new ArrayList<>();
+		listaContato.add(nome);
+		listaContato.add(email);
+		listaContato.add(senha);
+		
+		tela.mostrarMensagem("Nome: " + listaContato.get(0), titulo, icone);
+		tela.mostrarMensagem("E-mail: " + listaContato.get(1), titulo, icone);
+		tela.mostrarMensagem("Senha: " + listaContato.get(2), titulo, icone);
+		*/
 		
 		/*
 		String nome = tela.receberNome();
@@ -62,5 +85,7 @@ public class Main {
 	public static void main(String[] args) {
 		// Cria o objeto da classe Lista
 		Lista lista = new Lista();
+		lista.cadastrar();
 	}
 }
+
