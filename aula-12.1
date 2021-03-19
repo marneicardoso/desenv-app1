@@ -50,6 +50,7 @@ public class Tela {
 				null,
 				mensagem,
 				titulo,
+				JOptionPane.YES_NO_OPTION,
 				icone);
 	}
 }
@@ -57,7 +58,194 @@ public class Tela {
 
 
 // PACOTE CONTROLLER
+package app1.controller;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		// Cria um objeto da classe Controle
+		Controle controle = new Controle();
+		controle.iniciarAplicativo();
+	}
+}
 
 
 
+package app1.controller;
 
+import app1.model.Agenda;
+import app1.model.Contato;
+import app1.view.Tela;
+
+public class Controle {
+
+	// Método usado para iniciar o Aplicativo
+	public void iniciarAplicativo() {
+		
+		// Cria os objetos das classes
+		Tela tela = new Tela();
+		Agenda agenda = new Agenda();
+		
+		// Ativa o Sistema
+		boolean menuPrincipal = true;
+		
+		while (menuPrincipal) {
+			
+			// Menu
+			String opcaoEscolhida = tela.montarMenu();
+			
+			// Chama o método conforme a opção escohida
+			switch (opcaoEscolhida) {
+			
+				case "0":
+					//menuPrincipal = false; // modo simples
+					menuPrincipal = confirmarSair(tela);
+					break;
+					
+				case "1":
+					// Cadastrar
+					String titulo	= "Cadastro de Contato";
+					String nome		= tela.receberDados("Informe o nome", titulo, 1);
+					String idade	= tela.receberDados("Informe a idade", titulo, 1);
+					String salario	= tela.receberDados("Informe o salário", titulo, 1);
+					
+					// Converte os valores numéricos
+					try {
+						int _idade		= Integer.parseInt(idade);
+						double _salario	= Double.parseDouble(salario);
+						
+						// Cria um objeto da classe Contato
+						Contato contato = new Contato(nome, _idade, _salario);
+						
+						// Envia os dados para serem cadastrados no Sistema
+						String mensagem = agenda.cadastrarContatoService(contato);
+						
+						System.out.println("Return: " + mensagem);
+						
+					} catch (Exception e) {
+						tela.mostrarMensagem("Informe apenas números", "Atenção", 3);
+					}
+			}
+		}
+	} // fecha o método iniciarAplicativo
+	
+	// Confirmar Sair do Sistema
+	private Boolean confirmarSair(Tela _tela) {
+		
+		int sair = _tela.confirmarMensagem("Tem certeza?", "Encerrar Sistema", 3);
+		
+		//System.out.println("Retorno do YES NO: " + sair);
+		
+		if (sair == 0) {
+			_tela.mostrarMensagem("Encerrando o Sistema...", "Encerrando", 1);
+			return false;
+		}
+		
+		return true;
+		
+		/*
+		// IF Ternário (O mesmo teste que foi usado acima com o IF)
+		
+		// Quem recebe;	Condição; SE 	  : SENÃO
+		boolean menu = 	sair == 0 ? false : true;
+		
+		return menu;
+		*/
+	}
+}
+
+
+
+// PACOTE MODEL
+package app1.model;
+
+public class Contato {
+
+	// Atributos
+	private String nome;
+	private int idade;
+	private double salario;
+
+	// Construtor
+	public Contato(String _nome, int _idade, double _salario) {
+		this.nome = _nome;
+		this.idade = _idade;
+		this.salario = _salario;
+	}
+
+	// Get e Set
+	public String getNome() {
+		return this.nome;
+	}
+
+	public void setNome(String _nome) {
+		this.nome = _nome;
+	}
+
+	public int getIdade() {
+		return this.idade;
+	}
+
+	public void setIdade(int _idade) {
+		this.idade = _idade;
+	}
+
+	public double getSalario() {
+		return this.salario;
+	}
+
+	public void setSalario(double _salario) {
+		this.salario = _salario;
+	}
+}
+
+
+
+package app1.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Agenda {
+
+	// Cria a lista de Contatos (Agenda) [GLOBAL]
+	List<Contato> listaContato = new ArrayList<>();
+	
+	public String cadastrarContatoService(Contato contato) {
+		
+		// Verifica se os campos estão preenchidos
+		if (contato.getNome().equals("")) {
+			return "O campo Nome é obrigatório";
+		}
+		
+		// Adiciona o Contato na Agenda
+		listaContato.add(contato);
+		
+		return "Cadastro efetuado com sucesso!";
+	} // fecha o método cadastrarContatoService
+	
+	public String buscarContatoService() {
+		
+		// Guarda os valores buscados
+		String resultado = "";
+		
+		// Guarda o tamanho da lista (quantidade de registros) 
+		int tamanhoLista = listaContato.size();
+		
+		// Verifica se há registro na lista
+		if (tamanhoLista > 0) {
+			
+			// Percorre a lista
+			for (int i = 0; i < tamanhoLista; i++) {
+				String contato = "ID: " + (i + 1) +
+						"\nNome: " + listaContato.get(i).getNome();
+				
+				// CONTINUAR
+			}
+		}
+		
+		return resultado;
+		
+	} // fecha o método buscarContatoService
+}
