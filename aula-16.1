@@ -1,0 +1,111 @@
+<!-- View (tela) -->
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TelaPrincipal">
+
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:text="Calculadora (simples)"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:layout_marginTop="30sp"
+        android:layout_marginBottom="30sp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtValor1"
+        android:text="Valor 1"
+        android:textSize="24sp"
+        android:layout_marginLeft="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/edtValor1"
+        android:textSize="24sp"
+        android:inputType="number"
+        android:layout_marginLeft="30sp"
+        android:layout_marginRight="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtValor2"
+        android:text="Valor 2"
+        android:textSize="24sp"
+        android:layout_marginTop="20sp"
+        android:layout_marginLeft="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/edtValor2"
+        android:textSize="24sp"
+        android:inputType="number"
+        android:layout_marginLeft="30sp"
+        android:layout_marginRight="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnSomar"
+        android:text="Somar"
+        android:textSize="24sp"
+        android:layout_marginLeft="120sp"
+        android:layout_marginRight="120sp"
+        android:textAllCaps="false"
+        android:layout_marginTop="20sp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtResultado"
+        android:text="Resultado"
+        android:textSize="24sp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+// Java
+package com.example.calculadorasimples;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class TelaPrincipal extends AppCompatActivity {
+
+    // Atributos
+    EditText edtValor1, edtValor2;
+    TextView txtResultado;
+    Button btnSomar;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tela_principal);
+
+        // Cria os vínculos com os elementos da Tela (View)
+        this.edtValor1 = findViewById(R.id.edtValor1);
+        this.edtValor2 = findViewById(R.id.edtValor2);
+        this.txtResultado = findViewById(R.id.txtResultado);
+        this.btnSomar = findViewById(R.id.btnSomar);
+    }
+}
