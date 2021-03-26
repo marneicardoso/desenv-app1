@@ -86,6 +86,7 @@ package com.example.calculadorasimples;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -96,6 +97,7 @@ public class TelaPrincipal extends AppCompatActivity {
     EditText edtValor1, edtValor2;
     TextView txtResultado;
     Button btnSomar;
+    int valor1, valor2, resultado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,5 +109,29 @@ public class TelaPrincipal extends AppCompatActivity {
         this.edtValor2 = findViewById(R.id.edtValor2);
         this.txtResultado = findViewById(R.id.txtResultado);
         this.btnSomar = findViewById(R.id.btnSomar);
+
+        this.btnSomar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //valor1 = edtValor1;
+                //valor2 = edtValor2;
+
+                // Primeira forma de converter
+                valor1 = Integer.parseInt(edtValor1.getText().toString());
+
+                // Segunda forma de converter
+                String v2 = edtValor2.getText().toString();
+                valor2 = Integer.parseInt(v2);
+
+                resultado = valor1 + valor2;
+
+                // Converte o resultado (inteiro) para String
+                //String result = Integer.toString(resultado);
+
+                txtResultado.setText("Resultado: " + resultado);
+                //txtResultado.setText("Resultado: " + result);
+                //txtResultado.setText(Integer.toString(resultado));
+            }
+        });
     }
 }
