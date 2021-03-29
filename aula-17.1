@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/cinza_claro"
+    tools:context=".TelaPrincipal">
+
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:text="@string/titulo"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:background="@color/roxo"
+        android:textColor="@color/branco"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="65dp" />
+
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:background="@color/branco"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txtInfo"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="35dp"
+            android:paddingRight="35dp"
+            android:text="@string/info"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtAltura"
+        android:layout_marginTop="15dp"
+        android:text="@string/altura"
+        android:textSize="24sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/edtAltura"
+        android:background="@color/branco"
+        android:ems="10"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:inputType="number"
+        android:layout_width="100dp"
+        android:layout_height="45dp" />
+
+    <TextView
+        android:id="@+id/txtExemploAltura"
+        android:text="@string/exemploAltura"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtPeso"
+        android:layout_marginTop="15dp"
+        android:text="@string/peso"
+        android:textSize="24sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/edtPeso"
+        android:background="@color/branco"
+        android:ems="10"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:inputType="number"
+        android:layout_width="100dp"
+        android:layout_height="45dp" />
+
+    <TextView
+        android:id="@+id/txtExemploPeso"
+        android:text="@string/exemploPeso"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="cinza_claro">#dddddd</color>
+    <color name="roxo">#6200EE</color>
+    <color name="branco">#ffffff</color>
+    <color name="preto">#000000</color>
+</resources>
+
+
+
+<resources>
+    <string name="app_name">CalculadoraIMC</string>
+    <string name="titulo">Calculadora IMC</string>
+    <string name="info">Calcule o seu Índice de Massa Corpórea e veja dicas de acordo com o resultado.</string>
+    <string name="altura">Qual sua altura? (cm)</string>
+    <string name="exemploAltura">ex: 170</string>
+    <string name="peso">Qual seu peso? (Kg)</string>
+    <string name="exemploPeso">ex: 65</string>
+    <string name="sexo">Qual seu sexo?</string>
+    <string name="feminino">Feminino</string>
+    <string name="masculino">Masculino</string>
+    <string name="calcular">Calcular</string>
+</resources>
+
+
