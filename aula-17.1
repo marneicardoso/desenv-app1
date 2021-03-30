@@ -185,3 +185,58 @@
 </resources>
 
 
+
+// TELA PRINCIPAL (JAVA)
+package com.marneicardoso.calculadoraimc;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Toast;
+
+public class TelaPrincipal extends AppCompatActivity {
+
+    // Atributos (variáveis)
+    EditText edtAltura, edtPeso;
+    RadioButton rdbSexoF;
+    Button btnCalcular;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tela_principal);
+        // Oculta a barra que mostra o nome do app
+        getSupportActionBar().hide();
+
+        // Vincula os componentes da tela
+        referenciarComponentes();
+
+        // Listener do botão Calcular
+        btnCalcular.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calcularIMC();
+            }
+        });
+
+    } // fecha o método onCreate
+
+    private void referenciarComponentes() {
+        edtAltura = findViewById(R.id.edtAltura);
+        edtPeso = findViewById(R.id.edtPeso);
+        rdbSexoF = findViewById(R.id.rdbSexoF);
+        btnCalcular = findViewById(R.id.btnCalcular);
+    }
+
+    private void calcularIMC() {
+
+        // Mostra a mensagem de alerta (com Toast)
+        Toast.makeText(this, "Buenas", Toast.LENGTH_SHORT).show();
+    }
+}
+
+
