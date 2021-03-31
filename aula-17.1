@@ -54,18 +54,19 @@
         android:id="@+id/edtAltura"
         android:background="@color/branco"
         android:ems="10"
+        android:hint="@string/exemploAltura"
         android:textSize="24sp"
         android:textAlignment="center"
         android:inputType="number"
         android:layout_width="100dp"
         android:layout_height="45dp" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/txtExemploAltura"
         android:text="@string/exemploAltura"
         android:textSize="18sp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" />-->
 
     <TextView
         android:id="@+id/txtPeso"
@@ -79,18 +80,19 @@
         android:id="@+id/edtPeso"
         android:background="@color/branco"
         android:ems="10"
+        android:hint="@string/exemploPeso"
         android:textSize="24sp"
         android:textAlignment="center"
         android:inputType="number"
         android:layout_width="100dp"
         android:layout_height="45dp" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/txtExemploPeso"
         android:text="@string/exemploPeso"
         android:textSize="18sp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" />-->
 
     <RadioGroup
         android:orientation="horizontal"
@@ -100,11 +102,12 @@
 
         <RadioButton
             android:id="@+id/rdbSexoF"
-            android:layout_marginRight="25dp"
-            android:text="@string/feminino"
-            android:textSize="18sp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginRight="25dp"
+            android:checked="true"
+            android:text="@string/feminino"
+            android:textSize="18sp" />
 
         <RadioButton
             android:id="@+id/rdbSexoM"
@@ -165,6 +168,12 @@
     <color name="branco">#ffffff</color>
     <color name="preto">#000000</color>
     <color name="turquesa">#3D5AFE</color>
+
+    <color name="colorAbaixo">#29B6F6</color>
+    <color name="colorNormal">#4CAF50</color>
+    <color name="colorAcima">#FFB300</color>
+    <color name="colorObeso1">#FF5722</color>
+    <color name="colorObeso2">#B71C1C</color>
 </resources>
 
 
@@ -189,8 +198,10 @@
 // TELA PRINCIPAL (JAVA)
 package com.marneicardoso.calculadoraimc;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -233,10 +244,141 @@ public class TelaPrincipal extends AppCompatActivity {
     }
 
     private void calcularIMC() {
+        // 1. GUARDA OS VALORES INFORMADOS PELO USUÁRIO
+        String strAltura = edtAltura.getText().toString();
+        String strPeso = edtPeso.getText().toString();
 
-        // Mostra a mensagem de alerta (com Toast)
-        Toast.makeText(this, "Buenas", Toast.LENGTH_SHORT).show();
+        // 2. VERIFICA SE OS CAMPOS FORAM PREENCHIDOS
+        //if (strAltura.equals("")) { // O mesmo que o código abaixo
+        if (strAltura.isEmpty()) {
+            // Posiciona o cursor no campo Altura
+            edtAltura.requestFocus();
+
+            // Mostra a mensagem de alerta (com Toast)
+            Toast.makeText(this, "Informe sua Altura", Toast.LENGTH_SHORT).show();
+
+            /*
+            // Mostra a mensagem de alerta (com Alert)
+            AlertDialog.Builder msg = new AlertDialog.Builder(this);
+            msg.setTitle("Atenção");
+            msg.setMessage("Informe sua Altura");
+            msg.setNeutralButton("OK", null);
+            msg.show();
+            */
+
+            return;
+        }
+
+        if (strPeso.isEmpty()) {
+            // Posiciona o cursor no campo Peso
+            edtPeso.requestFocus();
+
+            // Mostra a mensagem de alerta (com Toast)
+            Toast.makeText(this, "Informe seu Peso", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // 3. CONVERTE OS VALORES INFORMADOS PARA NÚMEROS
+        double altura = Double.parseDouble(strAltura);
+        double peso = Double.parseDouble(strPeso);
+
+        String sexo = "M";
+
+        if (rdbSexoF.isChecked()) {
+            sexo = "F";
+        }
+
+        // 4. CALCULA O PESO IDEAL
+        IMC imc = new IMC();
+        double pesoIdeal = imc.calcularPesoIdeal(altura, sexo);
+
+        // 5. CALCULA O IMC
+        double valorIMC = imc.calcularIMC(altura, peso);
+
+        // 6. VERIFICA A FAIXA DE PESO
+        imc.verificarFaixaPeso(valorIMC, pesoIdeal);
+
+        // ABRE A NOVA JANELA E MOSTRA O RESULTADO ENCONTRADO
+        abrirJanelaResultado();
+    }
+
+    private void abrirJanelaResultado() {
+        // Super classe que carrega um objeto na memória para ser utilizado (câmera, janela etc)
+        Intent janelaResultado = new Intent(this, TelaResultado.class);
+        startActivity(janelaResultado);
     }
 }
 
+
+
+// Classe IMC (JAVA)
+package com.marneicardoso.calculadoraimc;
+
+public class IMC {
+    // Atributos (variáveis) ESTÁTICOS
+    public static String resultado;
+    public static String imcFinal;
+    public static int cor;
+
+    // CONSTANTES
+    private static final String ABAIXO = "ABAIXO DO PESO: 18 ou menos"
+            + "\n\nOrganismo vulnerável a infecções.";
+
+    private static final String NORMAL = "PESO IDEAL: 19 a 24"
+            + "\n\nPeso adequado para a altura.";
+
+    private static final String ACIMA = "ACIMA DO PESO: 25 a 30"
+            + "\n\nPredisposição à obesidade, pré-diabetes e hipertensão.";
+
+    private static final String OBESO_1 = "OBESIDADE: 31 a 39"
+            + "\n\nRisco de desenvolver diabetes, hipertensão e doenças cardiovasculares.";
+
+    private static final String OBESO_2 = "OBESIDADE MÓRBIDA: 40 ou mais" +
+            "\n\nRisco de 90% de desenvolver doenças como diabetes, reumatismos, " +
+            "hipertensão, doenças cardiovasculares e câncer.";
+
+    // Métodos
+    public Double calcularIMC(double altura, double peso) {
+        altura = altura / 100;
+        return peso / (altura * altura);
+    }
+
+    public Double calcularPesoIdeal(double altura, String sexo) {
+        if (sexo.equals("F")) {
+            return (altura - 100) * 0.85; // 59,5
+        }
+
+        return (altura - 100) * 0.90; // 63
+    }
+
+    public void verificarFaixaPeso(double valorIMC, double pesoIdeal) {
+        this.imcFinal = "Seu IMC: " + valorIMC;
+
+        this.resultado = "";
+
+        // Verifica a faixa de IMC
+        if (valorIMC < 18) {
+            this.resultado = ABAIXO;
+            this.cor = R.color.colorAbaixo;
+
+        } else if (valorIMC >= 18 && valorIMC < 25) {
+            this.resultado = NORMAL;
+            this.cor = R.color.colorNormal;
+
+        } else if (valorIMC >= 25 && valorIMC < 30) {
+            this.resultado = ACIMA;
+            this.cor = R.color.colorAcima;
+
+        } else if (valorIMC >= 30 && valorIMC < 40) {
+            this.resultado = OBESO_1;
+            this.cor = R.color.colorObeso1;
+
+        } else {
+            this.resultado = OBESO_2;
+            this.cor = R.color.colorObeso2;
+        }
+
+        resultado += "\n\nPeso ideal: " + pesoIdeal;
+    }
+}
 
