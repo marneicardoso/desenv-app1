@@ -1,7 +1,6 @@
 <!-- TELA PRINCIPAL -->
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -180,7 +179,7 @@
 
 <!-- STRINGS -->
 <resources>
-    <string name="app_name">CalculadoraIMC</string>
+    <string name="app_name">Calculadora IMC</string>
     <string name="titulo">Calculadora IMC</string>
     <string name="info">Calcule o seu Índice de Massa Corpórea e veja dicas de acordo com o resultado.</string>
     <string name="altura">Qual sua altura? (cm)</string>
@@ -234,8 +233,7 @@ public class TelaPrincipal extends AppCompatActivity {
                 calcularIMC();
             }
         });
-
-    } // fecha o método onCreate
+    }
 
     private void referenciarComponentes() {
         edtAltura = findViewById(R.id.edtAltura);
@@ -315,6 +313,8 @@ public class TelaPrincipal extends AppCompatActivity {
 // Classe IMC (JAVA)
 package com.marneicardoso.calculadoraimc;
 
+import java.text.DecimalFormat;
+
 public class IMC {
     // Atributos (variáveis) ESTÁTICOS
     public static String resultado;
@@ -325,7 +325,7 @@ public class IMC {
     private static final String ABAIXO = "ABAIXO DO PESO: 18 ou menos"
             + "\n\nOrganismo vulnerável a infecções.";
 
-    private static final String NORMAL = "PESO IDEAL: 19 a 24"
+    private static final String NORMAL = "PESO NORMAL: 19 a 24"
             + "\n\nPeso adequado para a altura.";
 
     private static final String ACIMA = "ACIMA DO PESO: 25 a 30"
@@ -342,6 +342,12 @@ public class IMC {
     public Double calcularIMC(double altura, double peso) {
         altura = altura / 100;
         return peso / (altura * altura);
+
+        /*
+		O cálculo do IMC é feito da seguinte forma:
+		A altura é multiplicada pela altura (ex: 1.70 * 1.70)
+		O peso é dividido pelo resultado da multiplicação da altura (65 / 2.89)
+		*/
     }
 
     public Double calcularPesoIdeal(double altura, String sexo) {
@@ -353,7 +359,16 @@ public class IMC {
     }
 
     public void verificarFaixaPeso(double valorIMC, double pesoIdeal) {
-        this.imcFinal = "Seu IMC: " + valorIMC;
+        // Formata para 1 casa decimal
+
+        // 1ª forma (Java)
+        /*DecimalFormat decimal = new DecimalFormat("0.0");
+        String strIMC = decimal.format(valorIMC);
+
+        this.imcFinal = "Seu IMC: " + strIMC;*/
+
+        // 2ª forma (Formatando o Float)
+        this.imcFinal = "Seu IMC: " + String.format("%.1f", valorIMC);
 
         this.resultado = "";
 
@@ -387,8 +402,7 @@ public class IMC {
 
 <!-- TELA RESULTADO -->
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -531,4 +545,3 @@ public class TelaResultado extends AppCompatActivity {
         System.exit(0);
     }
 }
-
