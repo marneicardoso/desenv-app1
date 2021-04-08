@@ -132,12 +132,16 @@ public class SplashScreen extends AppCompatActivity {
         android:id="@+id/txtTitulo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="25dp"
         android:layout_weight="10"
         android:gravity="center_horizontal"
-        android:textSize="32sp"
+        android:singleLine="false"
+        android:text="@string/nome"
         android:textColor="@color/vermelho"
-        android:layout_marginTop="25dp"
-        android:text="@string/nome" />
+        android:shadowColor="@color/black"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:textSize="32sp" />
 
     <ImageView
         android:id="@+id/imgChapolin"
@@ -207,7 +211,7 @@ public class SplashScreen extends AppCompatActivity {
         android:text="@string/frase"
         android:textSize="18sp"
         android:drawableLeft="@drawable/marreta_icon" />
-        
+
     <Switch
         android:id="@+id/swtMusica"
         android:layout_width="180dp"
@@ -220,6 +224,71 @@ public class SplashScreen extends AppCompatActivity {
         android:gravity="center_horizontal" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+// TRIVIA (JAVA)
+package com.marneicardoso.triviachapolin;
+
+public class Trivia {
+    // Atributos
+    private String usuario;
+    private String sexo;
+    private int acertos;
+    private static Trivia instancia;
+
+    // Construtor private
+    private Trivia() {
+        this.usuario = "";
+        this.sexo = "";
+        this.acertos = 0;
+    }
+
+    // Métodos
+    public void zerarAcertos() {
+        this.acertos = 0;
+    }
+
+    public void contarAcertos() {
+        this.acertos++;
+    }
+
+    public int getAcertos() {
+        return this.acertos;
+    }
+
+    public boolean isMasculino() {
+        return this.sexo.equals("M");
+    }
+
+    // Cria uma INSTÂNCIA ÚNICA de Trivia (Padrão de Projeto: Singleton)
+    public static Trivia getInstance() {
+        // Se ainda NÃO existir a instância, cria uma
+        if (instancia == null) {
+            instancia = new Trivia();
+        }
+
+        // Se JÁ existir, retorna a instância
+        return instancia;
+    }
+
+    // Get e Set
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+}
 
 
 
@@ -307,6 +376,12 @@ public class TelaPrincipal extends AppCompatActivity {
 
     private void gerenciarUsuario() {
         // Verifica se o nome já foi informado
+        if (!Trivia.getInstance().getUsuario().equals("")) {
+            edtUsuario.setText(Trivia.getInstance().getUsuario());
+        }
+
+        // Coloca o cursor no campo Nome
+        edtUsuario.requestFocus();
     }
 
     private void gerenciarMusica() {
