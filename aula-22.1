@@ -1,6 +1,6 @@
 Pasta com os arquivos: https://bit.ly/2R6pj7J
 
-<!-- SPLASH SCREEN (TELA XML) -->
+<!-- SPLASH SCREEN (XML) -->
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -10,19 +10,21 @@ Pasta com os arquivos: https://bit.ly/2R6pj7J
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@color/amarelo"
+    android:background="@color/amarelo2"
     tools:context=".SplashScreen">
 
     <ImageView
-        android:background="@drawable/logo"
+        android:background="@drawable/logo_emilli"
         android:layout_marginTop="150dp"
         android:layout_width="256dp"
         android:layout_height="256dp" />
 
     <TextView
-        android:textSize="36sp"
+        android:textSize="32sp"
         android:text="@string/nome"
+        android:textAllCaps="true"
         android:textStyle="bold"
+        android:textColor="@color/vermelho"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -40,6 +42,21 @@ Pasta com os arquivos: https://bit.ly/2R6pj7J
     <string name="feminino">Feminino</string>
     <string name="masculino">Masculino</string>
     <string name="frase">Sigam-me os bons!</string>
+    <string name="novoJogo">Jogar Novamente</string>
+    <string name="encerrar">Encerrar</string>
+
+    <!-- Textos das perguntas -->
+    <string name="pergunta1">Você deve dizer ao Chapolin que isto não são pedras, isto são...</string>
+    <string name="p1_resposta_1">Meteoritos</string>
+    <string name="p1_resposta_2">Aerolitos</string>
+
+    <string name="pergunta2">Roubamos a varinha mágica da Bruxa Baratuxa. Rápido Chapolin, vamos transformá-la em um aerolito! Paranga... Parati... Parangati... Chapolin, como é mesmo a palavra mágica?</string>
+    <string name="p2_resposta_1">Parangaricutirimicuáro</string>
+    <string name="p2_resposta_2">Parangaricutirimirruáro</string>
+
+    <string name="pergunta3">Encontramos um bandido perigoso. Vamos ligar para o detetive e informar o seu paradeiro. Chapolin, mas como é mesmo o nome desse bandido?</string>
+    <string name="p3_resposta_1">Racha Cuca</string>
+    <string name="p3_resposta_2">Tripa Seca</string>
 </resources>
 
 
@@ -58,8 +75,9 @@ Pasta com os arquivos: https://bit.ly/2R6pj7J
 
     <!-- Cores customizadas -->
     <color name="amarelo">#FFE57F</color>
+    <color name="amarelo2">#FFD740</color>
     <color name="laranja">#E65100</color>
-    <color name="vermelho">#BF360C</color>
+    <color name="vermelho">#B71C1C</color>
 </resources>
 
 
@@ -118,7 +136,7 @@ public class SplashScreen extends AppCompatActivity {
 
 
 
-<!-- TELA PRINCIPAL (TELA XML) -->
+<!-- TELA PRINCIPAL (XML) -->
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -139,6 +157,7 @@ public class SplashScreen extends AppCompatActivity {
         android:gravity="center_horizontal"
         android:singleLine="false"
         android:text="@string/nome"
+        android:textAllCaps="true"
         android:textColor="@color/vermelho"
         android:shadowColor="@color/black"
         android:shadowDx="3"
@@ -314,7 +333,7 @@ public class Musica {
     }
 
     public static void pararMusica() {
-        mediaPlayer.stop();
+        //mediaPlayer.stop();
         mediaPlayer.release();
 
         // Estados válidos: Prepared, Started, Stopped, Pause...
@@ -328,6 +347,7 @@ package com.marneicardoso.triviachapolin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -363,7 +383,8 @@ public class TelaPrincipal extends AppCompatActivity {
         btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                iniciarTrivia();
+                abrirProximaJanela();
             }
         });
 
@@ -375,6 +396,20 @@ public class TelaPrincipal extends AppCompatActivity {
         });
 
     } // fecha o método onCreate
+
+    private void iniciarTrivia() {
+        // Verifica o sexo
+        String sexo = "M";
+
+        if (rdbSexoF.isChecked()) {
+            sexo = "F";
+        }
+
+        // Cria a instância da classe (se não existir) ou utiliza a existente
+        Trivia.getInstance().setUsuario(edtUsuario.getText().toString());
+        Trivia.getInstance().setSexo(sexo);
+        Trivia.getInstance().zerarAcertos();
+    }
 
     private void gerenciarUsuario() {
         // Verifica se o nome já foi informado
@@ -401,6 +436,518 @@ public class TelaPrincipal extends AppCompatActivity {
         this.btnIniciar = findViewById(R.id.btnIniciar);
         this.rdbSexoF = findViewById(R.id.rdbSexoF);
         this.swtMusica = findViewById(R.id.swtMusica);
+    }
+
+    private void abrirProximaJanela() {
+        startActivity(new Intent(this, Pergunta1.class));
+        finish();
+    }
+
+    // VOLTAR
+}
+
+
+
+<!-- TELA PERGUNTA1 (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".Pergunta1">
+
+    <TextView
+        android:id="@+id/txtP1Pontos"
+        android:gravity="center_horizontal|center_vertical"
+        android:textSize="24sp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10" />
+
+    <ImageView
+        android:id="@+id/imgP1"
+        android:src="@drawable/pedras"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="40" />
+
+    <TextView
+        android:id="@+id/txtP1Pergunta"
+        android:textSize="18sp"
+        android:layout_marginTop="15dp"
+        android:text="@string/pergunta1"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20" />
+
+    <Button
+        android:id="@+id/btnP1Opcao1"
+        android:text="@string/p1_resposta_1"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center_horizontal|center_vertical" />
+
+    <Button
+        android:id="@+id/btnP1Opcao2"
+        android:text="@string/p1_resposta_2"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:layout_marginBottom="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center_horizontal|center_vertical" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+// TELA PERGUNTA1 (JAVA)
+package com.marneicardoso.triviachapolin;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class Pergunta1 extends AppCompatActivity {
+
+    // Atributos
+    TextView txtP1Pontos, txtP1Pergunta;
+    Button btnP1Opcao1, btnP1Opcao2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.pergunta1);
+        getSupportActionBar().hide(); // Esconde a barra
+
+        // Vincula os componentes da tela (XML)
+        referenciarComponentes();
+
+        // Atualiza a pontuação
+        txtP1Pontos.setText("Pontuação atual: " + Trivia.getInstance().getAcertos());
+
+        // Adiciona o nome do jogador à primeira pergunta
+        txtP1Pergunta.setText(darBoasVindas() + txtP1Pergunta.getText().toString());
+
+        // Resposta 1
+        btnP1Opcao1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirProximaJanela();
+            }
+        });
+
+        // Resposta 2 (correta)
+        btnP1Opcao2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Trivia.getInstance().contarAcertos();
+                abrirProximaJanela();
+            }
+        });
+
+    } // fecha o método onCreate
+
+    private void referenciarComponentes() {
+        txtP1Pergunta = findViewById(R.id.txtP1Pergunta);
+        txtP1Pontos = findViewById(R.id.txtP1Pontos);
+        btnP1Opcao1 = findViewById(R.id.btnP1Opcao1);
+        btnP1Opcao2 = findViewById(R.id.btnP1Opcao2);
+    }
+
+    private String darBoasVindas() {
+        String mensagem = "";
+
+        // Verifica o sexo do jogador
+        if (Trivia.getInstance().isMasculino()) {
+            mensagem = "Bem-vindo " + Trivia.getInstance().getUsuario() + "\n\n";
+
+        } else {
+            mensagem = "Bem-vinda " + Trivia.getInstance().getUsuario() + "\n\n";
+        }
+
+        return mensagem;
+    }
+
+    private void abrirProximaJanela() {
+        startActivity(new Intent(this, Pergunta2.class));
+        finish();
+    }
+}
+
+
+
+<!-- TELA PERGUNTA2 (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".Pergunta2">
+
+    <TextView
+        android:id="@+id/txtP2Pontos"
+        android:gravity="center_horizontal|center_vertical"
+        android:textSize="24sp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10" />
+
+    <ImageView
+        android:id="@+id/imgP2"
+        android:src="@drawable/baratuxa"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="40" />
+
+    <TextView
+        android:id="@+id/txtP2Pergunta"
+        android:textSize="18sp"
+        android:layout_marginTop="15dp"
+        android:text="@string/pergunta2"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20" />
+
+    <Button
+        android:id="@+id/btnP2Opcao1"
+        android:text="@string/p2_resposta_1"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center_horizontal|center_vertical" />
+
+    <Button
+        android:id="@+id/btnP2Opcao2"
+        android:text="@string/p2_resposta_2"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:layout_marginBottom="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center_horizontal|center_vertical" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+// TELA PERGUNTA2 (JAVA)
+package com.marneicardoso.triviachapolin;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class Pergunta2 extends AppCompatActivity {
+
+    // Atributos
+    TextView txtP2Pontos;
+    Button btnP2Opcao1, btnP2Opcao2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.pergunta2);
+        getSupportActionBar().hide(); // Esconde a barra
+
+        // Vincula os componentes da tela (XML)
+        referenciarComponentes();
+
+        // Atualiza a pontuação
+        txtP2Pontos.setText("Pontuação atual: " + Trivia.getInstance().getAcertos());
+
+        // Resposta 1
+        btnP2Opcao1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirProximaJanela();
+            }
+        });
+
+        // Resposta 2 (correto)
+        btnP2Opcao2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Trivia.getInstance().contarAcertos();
+                abrirProximaJanela();
+            }
+        });
+    }
+
+    private void referenciarComponentes() {
+        txtP2Pontos = findViewById(R.id.txtP2Pontos);
+        btnP2Opcao1 = findViewById(R.id.btnP2Opcao1);
+        btnP2Opcao2 = findViewById(R.id.btnP2Opcao2);
+    }
+
+    private void abrirProximaJanela() {
+        startActivity(new Intent(this, Pergunta3.class));
+        finish();
+    }
+}
+
+
+
+<!-- TELA PERGUNTA3 (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".Pergunta3">
+
+    <TextView
+        android:id="@+id/txtP3Pontos"
+        android:gravity="center_horizontal|center_vertical"
+        android:textSize="24sp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10" />
+
+    <ImageView
+        android:id="@+id/imgP3"
+        android:src="@drawable/bandido"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="40" />
+
+    <TextView
+        android:id="@+id/txtP3Pergunta"
+        android:textSize="18sp"
+        android:layout_marginTop="15dp"
+        android:text="@string/pergunta3"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20" />
+
+    <Button
+        android:id="@+id/btnP3Opcao1"
+        android:text="@string/p3_resposta_1"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center_horizontal|center_vertical" />
+
+    <Button
+        android:id="@+id/btnP3Opcao2"
+        android:text="@string/p3_resposta_2"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:layout_marginBottom="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center_horizontal|center_vertical" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+// TELA PERGUNTA3 (JAVA)
+package com.marneicardoso.triviachapolin;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class Pergunta3 extends AppCompatActivity {
+
+    // Atributos
+    TextView txtP3Pontos;
+    Button btnP3Opcao1, btnP3Opcao2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.pergunta3);
+        getSupportActionBar().hide(); // Esconde a barra
+
+        // Vincula os componentes da tela (XML)
+        referenciarComponentes();
+
+        // Atualiza a pontuação
+        txtP3Pontos.setText("Pontuação atual: " + Trivia.getInstance().getAcertos());
+
+        // Resposta 1 (correta)
+        btnP3Opcao1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Trivia.getInstance().contarAcertos();
+                abrirProximaJanela();
+            }
+        });
+
+        // Resposta 2
+        btnP3Opcao2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirProximaJanela();
+            }
+        });
+    }
+
+    private void referenciarComponentes() {
+        txtP3Pontos = findViewById(R.id.txtP3Pontos);
+        btnP3Opcao1 = findViewById(R.id.btnP3Opcao1);
+        btnP3Opcao2 = findViewById(R.id.btnP3Opcao2);
+    }
+
+    private void abrirProximaJanela() {
+        startActivity(new Intent(this, Pergunta3.class));
+        finish();
+    }
+}
+
+
+
+<!-- TELA FINAL (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TelaFinal">
+
+    <VideoView
+        android:id="@+id/vdFinal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="50"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/txtTotalAcertos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:gravity="center_horizontal|center_vertical"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btnNovoJogo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/novoJogo" />
+
+    <Button
+        android:id="@+id/btnEncerrar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:layout_marginBottom="80dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/encerrar" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+// TELA FINAL (JAVA)
+package com.marneicardoso.triviachapolin;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.VideoView;
+
+public class TelaFinal extends AppCompatActivity {
+
+    // Atributos
+    VideoView vdFinal;
+    TextView txtTotalAcertos;
+    Button btnNovoJovo, btnEncerrar;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tela_final);
+        getSupportActionBar().hide(); // Esconde a barra
+
+        // Vincula os componentes da tela (XML)
+        referenciarComponentes();
+
+        // Para a música de fundo
+        Musica.pararMusica();
+
+        // Mostra o número de acertos
+        // mostrarTotalAcertos
+
+        // Jogar Novamente
+        btnNovoJovo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iniciarNovoJogo();
+            }
+        });
+
+        btnEncerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                encerrarApp();
+            }
+        });
+    }
+
+    private void referenciarComponentes() {
+        vdFinal = findViewById(R.id.vdFinal);
+        txtTotalAcertos = findViewById(R.id.txtTotalAcertos);
+        btnNovoJovo = findViewById(R.id.btnNovoJogo);
+        btnEncerrar = findViewById(R.id.btnEncerrar);
+    }
+
+    private void iniciarNovoJogo() {
+        startActivity(new Intent(this, TelaPrincipal.class));
+        finish();
+    }
+
+    private void encerrarApp() {
+        finishAffinity();
+        System.exit(0);
     }
 }
 
