@@ -1,0 +1,1068 @@
+Pasta com os arquivos:
+ - Trivia Chapolin -> https://bit.ly/2R6pj7J
+
+<!-- MANIFEST -->
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.marneicardoso.triviachapolin">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.TriviaChapolin">
+
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".TelaPrincipal" />
+        <activity android:name=".Pergunta1"     />
+        <activity android:name=".Pergunta2"     />
+        <activity android:name=".Pergunta3"     />
+        <activity android:name=".TelaFinal"     />
+
+    </application>
+
+</manifest>
+
+
+
+<!-- STRINGS -->
+<resources>
+    <string name="app_name">TriviaChapolin</string>
+
+    <string name="nome">Trivia do Chapolin</string>
+    <string name="usuario">Qual seu nome?</string>
+    <string name="sexo">Qual seu sexo?</string>
+    <string name="feminino">Feminino</string>
+    <string name="masculino">Masculino</string>
+    <string name="frase">Sigam-me os bons!</string>
+    <string name="novoJogo">Jogar Novamente</string>
+    <string name="encerrar">Encerrar</string>
+
+    <!-- Textos das perguntas -->
+    <string name="pergunta1">Você deve dizer ao Chapolin que isto não são pedras, isto são...</string>
+    <string name="p1_resposta_1">Meteoritos</string>
+    <string name="p1_resposta_2">Aerolitos</string>
+
+    <string name="pergunta2">Roubamos a varinha mágica da Bruxa Baratuxa. Rápido Chapolin, vamos transformá-la em um aerolito! Paranga... Parati... Parangati... Chapolin, como é mesmo a palavra mágica?</string>
+    <string name="p2_resposta_1">Parangaricutirimicuáro</string>
+    <string name="p2_resposta_2">Parangaricutirimirruáro</string>
+
+    <string name="pergunta3">Encontramos um bandido perigoso. Vamos ligar para o detetive e informar o seu paradeiro. Chapolin, mas como é mesmo o nome desse bandido?</string>
+    <string name="p3_resposta_1">Racha Cuca</string>
+    <string name="p3_resposta_2">Tripa Seca</string>
+</resources>
+
+
+
+<!-- COLORS -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cores padrão (desta versão do sistema) -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Cores customizadas -->
+    <color name="amarelo">#FFE57F</color>
+    <color name="amarelo2">#FFD740</color>
+    <color name="laranja">#E65100</color>
+    <color name="vermelho">#B71C1C</color>
+</resources>
+
+
+
+<!-- THEME -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.TriviaChapolin" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/laranja</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/vermelho</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>
+
+
+
+<!-- SPLASH SCREEN (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/amarelo2"
+    tools:context=".SplashScreen">
+
+    <ImageView
+        android:background="@drawable/logo_emilli"
+        android:layout_marginTop="150dp"
+        android:layout_width="256dp"
+        android:layout_height="256dp" />
+
+    <TextView
+        android:textSize="32sp"
+        android:text="@string/nome"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textColor="@color/vermelho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+ 
+
+
+// SPLASH SCREEN (JAVA)
+package com.marneicardoso.triviachapolin;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+
+public class SplashScreen extends AppCompatActivity {
+
+    // Atributos
+    int tempo = 3000; // Tempo do delay
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.splash_screen);
+        getSupportActionBar().hide(); // Esconde a barra superior
+
+        // Mostra a tela de abertura (Splash Screen) por N segundos
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Envia para a Tela Principal
+                startActivity(new Intent(SplashScreen.this, TelaPrincipal.class));
+                finish(); // Destroy esta activity
+            }
+        }, tempo);
+    }
+}
+
+
+
+<!-- TELA PRINCIPAL (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".TelaPrincipal">
+
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="25dp"
+        android:layout_weight="10"
+        android:gravity="center_horizontal"
+        android:singleLine="false"
+        android:text="@string/nome"
+        android:textAllCaps="true"
+        android:textColor="@color/vermelho"
+        android:shadowColor="@color/black"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:textSize="32sp" />
+
+    <ImageView
+        android:id="@+id/imgChapolin"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="40"
+        app:srcCompat="@drawable/chapolin" />
+
+    <TextView
+        android:id="@+id/txtNome"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:textSize="18sp"
+        android:text="@string/usuario" />
+
+    <EditText
+        android:id="@+id/edtUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:inputType="textCapSentences"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/txtSexo"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:text="@string/sexo"
+        android:textSize="18sp" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rdbSexoF"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:checked="true"
+            android:text="@string/feminino" />
+
+        <RadioButton
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:checked="false"
+            android:text="@string/masculino" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnIniciar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/frase"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/marreta_icon" />
+
+    <Switch
+        android:id="@+id/swtMusica"
+        android:layout_width="180dp"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:text="Música de fundo"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="25dp"
+        android:checked="true"
+        android:gravity="center_horizontal" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+// TRIVIA (JAVA)
+package com.marneicardoso.triviachapolin;
+
+public class Trivia {
+    // Atributos
+    private String usuario;
+    private String sexo;
+    private int acertos;
+    private static Trivia instancia;
+
+    // Construtor private
+    private Trivia() {
+        this.usuario = "";
+        this.sexo = "";
+        this.acertos = 0;
+    }
+
+    // Métodos
+    public void zerarAcertos() {
+        this.acertos = 0;
+    }
+
+    public void contarAcertos() {
+        this.acertos++;
+    }
+
+    public int getAcertos() {
+        return this.acertos;
+    }
+
+    public boolean isMasculino() {
+        return this.sexo.equals("M");
+    }
+
+    // Cria uma INSTÂNCIA ÚNICA de Trivia (Padrão de Projeto: Singleton)
+    public static Trivia getInstance() {
+        // Se ainda NÃO existir a instância, cria uma
+        if (instancia == null) {
+            instancia = new Trivia();
+        }
+
+        // Se JÁ existir, retorna a instância
+        return instancia;
+    }
+
+    // Get e Set
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+}
+
+
+
+// MUSICA (JAVA)
+package com.marneicardoso.triviachapolin;
+
+import android.content.Context;
+import android.media.MediaPlayer;
+
+public class Musica {
+    public static MediaPlayer mediaPlayer;
+
+    public static void iniciarMusica(Context context, int rawID, boolean isLoop) {
+        mediaPlayer = MediaPlayer.create(context, rawID);
+
+        // Atribui o loop para a música (true ou false)
+        mediaPlayer.setLooping(isLoop);
+
+        // Iniciar a música
+        mediaPlayer.start();
+    }
+
+    public static void pararMusica() {
+        //mediaPlayer.stop();
+        mediaPlayer.release();
+
+        // Estados válidos: Prepared, Started, Stopped, Pause...
+    }
+}
+
+
+
+// TELA PRINCIPAL (JAVA)
+package com.marneicardoso.triviachapolin;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Switch;
+import android.widget.Toast;
+
+public class TelaPrincipal extends AppCompatActivity {
+
+    // Atributos
+    private EditText edtUsuario;
+    private RadioButton rdbSexoF;
+    private Button btnIniciar;
+    private Switch swtMusica;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tela_principal);
+        // Esconde a barra de título
+        getSupportActionBar().hide();
+
+        // Vincula os componentes da tela (XML)
+        referenciarComponentes();
+
+        // Gerencia o campo nome
+        gerenciarUsuario();
+
+        // Inicia a música de fundo ao iniciar o App
+        gerenciarMusica();
+
+        btnIniciar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iniciarTrivia();
+                abrirProximaJanela();
+            }
+        });
+
+        swtMusica.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gerenciarMusica();
+            }
+        });
+
+    } // fecha o método onCreate
+
+    private void iniciarTrivia() {
+        // Verifica o sexo
+        String sexo = "M";
+
+        if (rdbSexoF.isChecked()) {
+            sexo = "F";
+        }
+
+        // Cria a instância da classe (se não existir) ou utiliza a existente
+        Trivia.getInstance().setUsuario(edtUsuario.getText().toString());
+        Trivia.getInstance().setSexo(sexo);
+        Trivia.getInstance().zerarAcertos();
+    }
+
+    private void gerenciarUsuario() {
+        // Verifica se o nome já foi informado
+        if (!Trivia.getInstance().getUsuario().equals("")) {
+            edtUsuario.setText(Trivia.getInstance().getUsuario());
+        }
+
+        // Coloca o cursor no campo Nome
+        edtUsuario.requestFocus();
+    }
+
+    private void gerenciarMusica() {
+        // Verifica se a música de fundo está ativada pelo usuário
+        if (swtMusica.isChecked()) {
+            //Musica.iniciarMusica(this, R.raw.musica, true);
+
+            //  TIPO     NOME   VALOR
+                Musica   m =    new Musica();
+            m.iniciarMusica(this, R.raw.musica, true);
+
+        } else {
+            //Musica.pararMusica();
+
+            //  TIPO     NOME   VALOR
+                Musica   m =    new Musica();
+            m.pararMusica();
+        }
+    }
+
+    private void referenciarComponentes() {
+        this.edtUsuario = findViewById(R.id.edtUsuario);
+        this.btnIniciar = findViewById(R.id.btnIniciar);
+        this.rdbSexoF = findViewById(R.id.rdbSexoF);
+        this.swtMusica = findViewById(R.id.swtMusica);
+    }
+
+    private void abrirProximaJanela() {
+        startActivity(new Intent(this, Pergunta1.class));
+        finish();
+    }
+
+    // Não permite que o Usuário volte à tela anterior
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Não é permitido voltar", Toast.LENGTH_LONG);
+    }
+}
+
+
+
+<!-- TELA PERGUNTA1 (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".Pergunta1">
+
+    <TextView
+        android:id="@+id/txtP1Pontos"
+        android:gravity="center_horizontal|center_vertical"
+        android:textSize="24sp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10" />
+
+    <ImageView
+        android:id="@+id/imgP1"
+        android:src="@drawable/pedras"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="40" />
+
+    <TextView
+        android:id="@+id/txtP1Pergunta"
+        android:textSize="18sp"
+        android:layout_marginTop="15dp"
+        android:text="@string/pergunta1"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20" />
+
+    <Button
+        android:id="@+id/btnP1Opcao1"
+        android:text="@string/p1_resposta_1"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center_horizontal|center_vertical" />
+
+    <Button
+        android:id="@+id/btnP1Opcao2"
+        android:text="@string/p1_resposta_2"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:layout_marginBottom="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center_horizontal|center_vertical" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+// TELA PERGUNTA1 (JAVA)
+package com.marneicardoso.triviachapolin;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class Pergunta1 extends AppCompatActivity {
+
+    // Atributos
+    TextView txtP1Pontos, txtP1Pergunta;
+    Button btnP1Opcao1, btnP1Opcao2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.pergunta1);
+        getSupportActionBar().hide(); // Esconde a barra
+
+        // Vincula os componentes da tela (XML)
+        referenciarComponentes();
+
+        // Atualiza a pontuação
+        txtP1Pontos.setText("Pontuação atual: " + Trivia.getInstance().getAcertos());
+
+        // Adiciona o nome do jogador à primeira pergunta
+        txtP1Pergunta.setText(darBoasVindas() + txtP1Pergunta.getText().toString());
+
+        // Resposta 1
+        btnP1Opcao1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirProximaJanela();
+            }
+        });
+
+        // Resposta 2 (correta)
+        btnP1Opcao2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Trivia.getInstance().contarAcertos();
+                abrirProximaJanela();
+            }
+        });
+
+    } // fecha o método onCreate
+
+    private void referenciarComponentes() {
+        txtP1Pergunta = findViewById(R.id.txtP1Pergunta);
+        txtP1Pontos = findViewById(R.id.txtP1Pontos);
+        btnP1Opcao1 = findViewById(R.id.btnP1Opcao1);
+        btnP1Opcao2 = findViewById(R.id.btnP1Opcao2);
+    }
+
+    private String darBoasVindas() {
+        String mensagem = "";
+
+        // Verifica o sexo do jogador
+        if (Trivia.getInstance().isMasculino()) {
+            mensagem = "Bem-vindo " + Trivia.getInstance().getUsuario() + "\n\n";
+
+        } else {
+            mensagem = "Bem-vinda " + Trivia.getInstance().getUsuario() + "\n\n";
+        }
+
+        return mensagem;
+    }
+
+    private void abrirProximaJanela() {
+        startActivity(new Intent(this, Pergunta2.class));
+        finish();
+    }
+
+    // Não permite que o Usuário volte à tela anterior
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Não é permitido voltar", Toast.LENGTH_LONG);
+    }
+}
+
+
+
+<!-- TELA PERGUNTA2 (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".Pergunta2">
+
+    <TextView
+        android:id="@+id/txtP2Pontos"
+        android:gravity="center_horizontal|center_vertical"
+        android:textSize="24sp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10" />
+
+    <ImageView
+        android:id="@+id/imgP2"
+        android:src="@drawable/baratuxa"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="40" />
+
+    <TextView
+        android:id="@+id/txtP2Pergunta"
+        android:textSize="18sp"
+        android:layout_marginTop="15dp"
+        android:text="@string/pergunta2"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20" />
+
+    <Button
+        android:id="@+id/btnP2Opcao1"
+        android:text="@string/p2_resposta_1"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center_horizontal|center_vertical" />
+
+    <Button
+        android:id="@+id/btnP2Opcao2"
+        android:text="@string/p2_resposta_2"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:layout_marginBottom="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center_horizontal|center_vertical" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+// TELA PERGUNTA2 (JAVA)
+package com.marneicardoso.triviachapolin;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class Pergunta2 extends AppCompatActivity {
+
+    // Atributos
+    TextView txtP2Pontos;
+    Button btnP2Opcao1, btnP2Opcao2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.pergunta2);
+        getSupportActionBar().hide(); // Esconde a barra
+
+        // Vincula os componentes da tela (XML)
+        referenciarComponentes();
+
+        // Atualiza a pontuação
+        txtP2Pontos.setText("Pontuação atual: " + Trivia.getInstance().getAcertos());
+
+        // Resposta 1
+        btnP2Opcao1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirProximaJanela();
+            }
+        });
+
+        // Resposta 2 (correto)
+        btnP2Opcao2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Trivia.getInstance().contarAcertos();
+                abrirProximaJanela();
+            }
+        });
+    }
+
+    private void referenciarComponentes() {
+        txtP2Pontos = findViewById(R.id.txtP2Pontos);
+        btnP2Opcao1 = findViewById(R.id.btnP2Opcao1);
+        btnP2Opcao2 = findViewById(R.id.btnP2Opcao2);
+    }
+
+    private void abrirProximaJanela() {
+        startActivity(new Intent(this, Pergunta3.class));
+        finish();
+    }
+
+    // Não permite que o Usuário volte à tela anterior
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Não é permitido voltar", Toast.LENGTH_LONG);
+    }
+}
+
+
+
+<!-- TELA PERGUNTA3 (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".Pergunta3">
+
+    <TextView
+        android:id="@+id/txtP3Pontos"
+        android:gravity="center_horizontal|center_vertical"
+        android:textSize="24sp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10" />
+
+    <ImageView
+        android:id="@+id/imgP3"
+        android:src="@drawable/bandido"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="40" />
+
+    <TextView
+        android:id="@+id/txtP3Pergunta"
+        android:textSize="18sp"
+        android:layout_marginTop="15dp"
+        android:text="@string/pergunta3"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20" />
+
+    <Button
+        android:id="@+id/btnP3Opcao1"
+        android:text="@string/p3_resposta_1"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center_horizontal|center_vertical" />
+
+    <Button
+        android:id="@+id/btnP3Opcao2"
+        android:text="@string/p3_resposta_2"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:layout_marginBottom="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center_horizontal|center_vertical" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+// TELA PERGUNTA3 (JAVA)
+package com.marneicardoso.triviachapolin;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class Pergunta3 extends AppCompatActivity {
+
+    // Atributos
+    TextView txtP3Pontos;
+    Button btnP3Opcao1, btnP3Opcao2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.pergunta3);
+        getSupportActionBar().hide(); // Esconde a barra
+
+        // Vincula os componentes da tela (XML)
+        referenciarComponentes();
+
+        // Atualiza a pontuação
+        txtP3Pontos.setText("Pontuação atual: " + Trivia.getInstance().getAcertos());
+
+        // Resposta 1 (correta)
+        btnP3Opcao1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Trivia.getInstance().contarAcertos();
+                abrirProximaJanela();
+            }
+        });
+
+        // Resposta 2
+        btnP3Opcao2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirProximaJanela();
+            }
+        });
+    }
+
+    private void referenciarComponentes() {
+        txtP3Pontos = findViewById(R.id.txtP3Pontos);
+        btnP3Opcao1 = findViewById(R.id.btnP3Opcao1);
+        btnP3Opcao2 = findViewById(R.id.btnP3Opcao2);
+    }
+
+    private void abrirProximaJanela() {
+        startActivity(new Intent(this, TelaFinal.class));
+        finishAffinity();
+    }
+
+    // Não permite que o Usuário volte à tela anterior
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Não é permitido voltar", Toast.LENGTH_LONG);
+    }
+}
+
+
+
+<!-- TELA FINAL (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TelaFinal">
+
+    <VideoView
+        android:id="@+id/vdFinal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="50"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/txtTotalAcertos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:gravity="center_horizontal|center_vertical"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btnNovoJogo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/novoJogo" />
+
+    <Button
+        android:id="@+id/btnEncerrar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:layout_marginBottom="80dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/encerrar" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+// TELA FINAL (JAVA)
+package com.marneicardoso.triviachapolin;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Switch;
+import android.widget.Toast;
+
+public class TelaPrincipal extends AppCompatActivity {
+
+    // Atributos
+    private EditText edtUsuario;
+    private RadioButton rdbSexoF;
+    private Button btnIniciar;
+    private Switch swtMusica;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tela_principal);
+        // Esconde a barra de título
+        getSupportActionBar().hide();
+
+        // Vincula os componentes da tela (XML)
+        referenciarComponentes();
+
+        // Gerencia o campo nome
+        gerenciarUsuario();
+
+        // Inicia a música de fundo ao iniciar o App
+        gerenciarMusica();
+
+        btnIniciar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iniciarTrivia();
+                abrirProximaJanela();
+            }
+        });
+
+        swtMusica.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gerenciarMusica();
+            }
+        });
+
+    } // fecha o método onCreate
+
+    private void iniciarTrivia() {
+        // Verifica o sexo
+        String sexo = "M";
+
+        if (rdbSexoF.isChecked()) {
+            sexo = "F";
+        }
+
+        // Cria a instância da classe (se não existir) ou utiliza a existente
+        Trivia.getInstance().setUsuario(edtUsuario.getText().toString());
+        Trivia.getInstance().setSexo(sexo);
+        Trivia.getInstance().zerarAcertos();
+    }
+
+    private void gerenciarUsuario() {
+        // Verifica se o nome já foi informado
+        if (!Trivia.getInstance().getUsuario().equals("")) {
+            edtUsuario.setText(Trivia.getInstance().getUsuario());
+        }
+
+        // Coloca o cursor no campo Nome
+        edtUsuario.requestFocus();
+    }
+
+    private void gerenciarMusica() {
+        // Verifica se a música de fundo está ativada pelo usuário
+        if (swtMusica.isChecked()) {
+            //Musica.iniciarMusica(this, R.raw.musica, true);
+
+            //  TIPO     NOME   VALOR
+                Musica   m =    new Musica();
+            m.iniciarMusica(this, R.raw.musica, true);
+
+        } else {
+            //Musica.pararMusica();
+
+            //  TIPO     NOME   VALOR
+                Musica   m =    new Musica();
+            m.pararMusica();
+        }
+    }
+
+    private void referenciarComponentes() {
+        this.edtUsuario = findViewById(R.id.edtUsuario);
+        this.btnIniciar = findViewById(R.id.btnIniciar);
+        this.rdbSexoF = findViewById(R.id.rdbSexoF);
+        this.swtMusica = findViewById(R.id.swtMusica);
+    }
+
+    private void abrirProximaJanela() {
+        startActivity(new Intent(this, Pergunta1.class));
+        finish();
+    }
+
+    // Não permite que o Usuário volte à tela anterior
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Não é permitido voltar", Toast.LENGTH_LONG);
+    }
+}
+ 
+ 
+ 
