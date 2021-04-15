@@ -1,0 +1,342 @@
+Pasta com os arquivos:
+ - Cadastro DB Firebase -> https://bit.ly/3e2DJ0H
+ 
+ <!-- MANIFEST -->
+ <?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.marneicardoso.cadastrofirebase">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CadastroFirebase">
+        <activity android:name=".TelaUsuario"></activity>
+        <activity android:name=".TelaCadastro" />
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".TelaPrincipal" />
+    </application>
+
+</manifest>
+
+
+
+<!-- STRINGS -->
+<resources>
+    <string name="app_name">CadastroFirebase</string>
+
+    <string name="txt_usuario">Informe o usuário</string>
+    <string name="txt_senha">Informe a senha</string>
+    <string name="txt_idade">Informe a idade</string>
+    <string name="sem_cadastro">Ainda não tem cadastro?</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_cadastrar">Cadastrar</string>
+</resources>
+
+
+
+<!-- COLORS -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- Cores personalizadas -->
+    <color name="cinza">#dddddd</color>
+    <color name="prata">#999999</color>
+    <color name="grafite">#232323</color>
+    <color name="amarelo">#ffc400</color>
+    <color name="laranja">#ff8f00</color>
+</resources>
+
+
+
+<!-- THEME -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.CadastroFirebase" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/laranja</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/grafite</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>
+
+
+
+<!-- SPLASH SCREEN (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal|center_vertical"
+    android:background="@color/grafite"
+    tools:context=".SplashScreen">
+
+    <ImageView
+        android:src="@drawable/cadastro_firebase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+// SPLASH SCREEN (JAVA)
+package com.marneicardoso.cadastrofirebase;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+
+public class SplashScreen extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.splash_screen);
+        getSupportActionBar().hide();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(SplashScreen.this, TelaPrincipal.class));
+                finish();
+            }
+        }, 2000);
+    }
+}
+
+
+
+<!-- TELA PRINCIPAL (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingLeft="75dp"
+    android:paddingRight="75dp"
+    android:background="@color/grafite"
+    tools:context=".TelaPrincipal">
+
+    <ImageView
+        android:src="@drawable/cadastro_firebase"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+    
+    <TextView
+        android:textSize="18sp"
+        android:textColor="@color/cinza"
+        android:text="@string/txt_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/edtUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/cinza"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="18sp"
+        android:textColor="@color/cinza"
+        android:text="@string/txt_senha" />
+
+    <EditText
+        android:id="@+id/edtSenha"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/cinza"
+        android:inputType="textWebPassword" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/laranja"
+        android:textColor="@color/grafite"
+        android:textSize="18sp"
+        android:text="@string/btn_login" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:textSize="18sp"
+        android:textColor="@color/cinza"
+        android:text="@string/sem_cadastro" />
+
+    <Button
+        android:id="@+id/btnCadastrar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/amarelo"
+        android:textColor="@color/grafite"
+        android:textSize="18sp"
+        android:text="@string/btn_cadastrar" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+<!-- TELA CADASTRO (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingLeft="75dp"
+    android:paddingRight="75dp"
+    android:background="@color/grafite"
+    tools:context=".TelaCadastro">
+
+    <ImageView
+        android:src="@drawable/cadastro_firebase"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/cinza"
+        android:text="@string/txt_usuario" />
+
+    <EditText
+        android:id="@+id/edtUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/cinza"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="18sp"
+        android:textColor="@color/cinza"
+        android:text="@string/txt_senha" />
+
+    <EditText
+        android:id="@+id/edtSenha"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/cinza"
+        android:inputType="textWebPassword" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="18sp"
+        android:textColor="@color/cinza"
+        android:text="@string/txt_idade" />
+
+    <EditText
+        android:id="@+id/edtIdade"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/cinza"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/btnCadastrar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="35dp"
+        android:background="@color/amarelo"
+        android:textColor="@color/grafite"
+        android:textSize="18sp"
+        android:text="@string/btn_cadastrar" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+<!-- TELA USUARIO (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingLeft="75dp"
+    android:paddingRight="75dp"
+    android:background="@color/grafite"
+    tools:context=".TelaUsuario">
+
+    <ImageView
+        android:src="@drawable/cadastro_firebase"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+    <TextView
+        android:id="@+id/txtUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/cinza"
+        android:text="Dados do usuário" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
