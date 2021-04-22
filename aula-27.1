@@ -1,0 +1,917 @@
+Pasta com os arquivos:
+ - Cadastro DB Firebase -> https://bit.ly/3e2DJ0H
+
+<!-- MANIFEST -->
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.marneicardoso.cadastrofirebase">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CadastroFirebase">
+
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".TelaPrincipal" />
+        <activity android:name=".TelaUsuario"   />
+        <activity android:name=".TelaCadastro"  />
+    </application>
+
+</manifest>
+
+
+
+<!-- STRINGS -->
+<resources>
+    <string name="app_name">CadastroFirebase</string>
+
+    <string name="txt_usuario">Informe o usuário</string>
+    <string name="txt_senha">Informe a senha</string>
+    <string name="txt_idade">Informe a idade</string>
+    <string name="sem_cadastro">Ainda não tem cadastro?</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_cadastrar">Cadastrar</string>
+</resources>
+
+
+
+<!-- COLORS -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- Cores personalizadas -->
+    <color name="cinza">#dddddd</color>
+    <color name="prata">#999999</color>
+    <color name="grafite">#232323</color>
+    <color name="amarelo">#ffc400</color>
+    <color name="laranja">#ff8f00</color>
+</resources>
+
+
+
+<!-- THEME -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.CadastroFirebase" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/laranja</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/grafite</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>
+
+
+
+<!-- SPLASH SCREEN (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal|center_vertical"
+    android:background="@color/grafite"
+    tools:context=".SplashScreen">
+
+    <ImageView
+        android:src="@drawable/cadastro_firebase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+// SPLASH SCREEN (JAVA)
+package com.marneicardoso.cadastrofirebase;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+
+public class SplashScreen extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.splash_screen);
+        getSupportActionBar().hide();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(SplashScreen.this, TelaPrincipal.class));
+                finish();
+            }
+        }, 2000);
+    }
+}
+
+
+
+<!-- TELA PRINCIPAL (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingLeft="75dp"
+    android:paddingRight="75dp"
+    android:background="@color/grafite"
+    tools:context=".TelaPrincipal">
+
+    <ImageView
+        android:src="@drawable/cadastro_firebase"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+    
+    <TextView
+        android:textSize="18sp"
+        android:textColor="@color/cinza"
+        android:text="@string/txt_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/edtUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/cinza"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="18sp"
+        android:textColor="@color/cinza"
+        android:text="@string/txt_senha" />
+
+    <EditText
+        android:id="@+id/edtSenha"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/cinza"
+        android:inputType="textWebPassword" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/grafite"
+        android:text="@string/btn_login"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:textSize="18sp"
+        android:textColor="@color/cinza"
+        android:text="@string/sem_cadastro" />
+
+    <Button
+        android:id="@+id/btnCadastrar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/amarelo"
+        android:textColor="@color/grafite"
+        android:textSize="18sp"
+        android:text="@string/btn_cadastrar" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+// TELA PRINCIPAL (JAVA)
+package com.marneicardoso.cadastrofirebase;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+public class TelaPrincipal extends AppCompatActivity {
+
+    // Atributos
+    EditText edtUsuario, edtSenha;
+    Button btnCadastrar, btnLogin;
+
+    // Banco de Dados Firebase
+    FirebaseDatabase database;
+    DatabaseReference reference;
+
+    // Atributo (variável) estática (para ser acessada por outras Classes)
+    public static String usuarioInformado;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tela_principal);
+        getSupportActionBar().hide();
+
+        // Vincula os componentes
+        referenciarComponentes();
+
+        // Guarda a instância e a referência do BD
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference();
+
+        // Coloca o foco no campo Usuário
+        edtUsuario.requestFocus();
+
+        // Listener dos botões
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                efetuarLogin();
+            }
+        });
+
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirTelaCadastro();
+            }
+        });
+
+    } // fecha o método OnCreate
+
+    private void efetuarLogin() {
+        // Guarda o Usuário e a Senha informados
+        usuarioInformado = edtUsuario.getText().toString().toLowerCase();
+        final String senhaInformada = edtSenha.getText().toString();
+
+        // Listener de acesso ao BD
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Verifica se o Usuário NÃO existe
+                if (snapshot.child("usuario").child(usuarioInformado).getValue() == null) {
+                    Toast.makeText(TelaPrincipal.this, "Usuário inválido", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    // Verifica se a Senha está correta
+                    if (snapshot.child("usuario").child(usuarioInformado).child("senha").getValue().equals(senhaInformada)) {
+                        carregarDadosUsuario();
+
+                    } else {
+                        Toast.makeText(TelaPrincipal.this, "Senha inválida", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //
+            }
+        });
+    } // fecha o método efetuarLogin
+
+    private void carregarDadosUsuario() {
+        // Cria o Intent
+        Intent telaUsuario = new Intent(this, TelaUsuario.class);
+
+        // Passa o usuário informado pela Intent
+        telaUsuario.putExtra("usuarioInformado", usuarioInformado);
+
+        // Envia para a tela de Usuário
+        startActivity(telaUsuario);
+    }
+
+    private void abrirTelaCadastro() {
+        startActivity(new Intent(this, TelaCadastro.class));
+    }
+
+    private void referenciarComponentes() {
+        edtUsuario = findViewById(R.id.edtUsuario);
+        edtSenha = findViewById(R.id.edtSenha);
+        btnCadastrar = findViewById(R.id.btnCadastrar);
+        btnLogin = findViewById(R.id.btnLogin);
+    }
+}
+
+
+
+<!-- TELA CADASTRO (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingLeft="75dp"
+    android:paddingRight="75dp"
+    android:background="@color/grafite"
+    tools:context=".TelaCadastro">
+
+    <ImageView
+        android:src="@drawable/cadastro_firebase"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/cinza"
+        android:text="@string/txt_usuario" />
+
+    <EditText
+        android:id="@+id/edtUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/cinza"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="18sp"
+        android:textColor="@color/cinza"
+        android:text="@string/txt_senha" />
+
+    <EditText
+        android:id="@+id/edtSenha"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/cinza"
+        android:inputType="textWebPassword" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="18sp"
+        android:textColor="@color/cinza"
+        android:text="@string/txt_idade" />
+
+    <EditText
+        android:id="@+id/edtIdade"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/cinza"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/btnCadastrar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="35dp"
+        android:background="@color/amarelo"
+        android:textColor="@color/grafite"
+        android:textSize="18sp"
+        android:text="@string/btn_cadastrar" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+// TELA CADASTRO (JAVA)
+package com.marneicardoso.cadastrofirebase;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+public class TelaPrincipal extends AppCompatActivity {
+
+    // Atributos
+    EditText edtUsuario, edtSenha;
+    Button btnCadastrar, btnLogin;
+
+    // Banco de Dados Firebase
+    FirebaseDatabase database;
+    DatabaseReference reference;
+
+    // Atributo (variável) estática (para ser acessada por outras Classes)
+    public static String usuarioInformado;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tela_principal);
+        getSupportActionBar().hide();
+
+        // Vincula os componentes
+        referenciarComponentes();
+
+        // Guarda a instância e a referência do BD
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference();
+
+        // Coloca o foco no campo Usuário
+        edtUsuario.requestFocus();
+
+        // Listener dos botões
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                efetuarLogin();
+            }
+        });
+
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirTelaCadastro();
+            }
+        });
+
+    } // fecha o método OnCreate
+
+    private void efetuarLogin() {
+        // Guarda o Usuário e a Senha informados
+        usuarioInformado = edtUsuario.getText().toString().toLowerCase();
+        final String senhaInformada = edtSenha.getText().toString();
+
+        // Listener de acesso ao BD
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Verifica se o Usuário NÃO existe
+                if (snapshot.child("usuario").child(usuarioInformado).getValue() == null) {
+                    Toast.makeText(TelaPrincipal.this, "Usuário inválido", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    String _senha = Criptografia.criptografarMD5(senhaInformada);
+                    // Verifica se a Senha está correta
+                    if (snapshot.child("usuario").child(usuarioInformado).child("senha").getValue().equals(_senha)) {
+                        carregarDadosUsuario();
+
+                    } else {
+                        Toast.makeText(TelaPrincipal.this, "Senha inválida", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //
+            }
+        });
+    } // fecha o método efetuarLogin
+
+    private void carregarDadosUsuario() {
+        // Cria o Intent
+        Intent telaUsuario = new Intent(this, TelaUsuario.class);
+
+        // Passa o usuário informado pela Intent
+        telaUsuario.putExtra("usuarioInformado", usuarioInformado);
+
+        // Envia para a tela de Usuário
+        startActivity(telaUsuario);
+    }
+
+    private void abrirTelaCadastro() {
+        startActivity(new Intent(this, TelaCadastro.class));
+    }
+
+    private void referenciarComponentes() {
+        edtUsuario = findViewById(R.id.edtUsuario);
+        edtSenha = findViewById(R.id.edtSenha);
+        btnCadastrar = findViewById(R.id.btnCadastrar);
+        btnLogin = findViewById(R.id.btnLogin);
+    }
+}
+
+
+<!-- TELA USUARIO (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingLeft="75dp"
+    android:paddingRight="75dp"
+    android:background="@color/grafite"
+    tools:context=".TelaUsuario">
+
+    <ImageView
+        android:src="@drawable/cadastro_firebase"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+    <TextView
+        android:id="@+id/txtUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/cinza"
+        android:text="Dados do usuário" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+// TELA USUARIO (JAVA)
+package com.marneicardoso.cadastrofirebase;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+public class TelaUsuario extends AppCompatActivity {
+
+    // Atributos
+    TextView txtUsuario;
+
+    // Banco de Dado Firebase
+    FirebaseDatabase database;
+    DatabaseReference reference;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tela_usuario);
+        getSupportActionBar().hide();
+
+        // Vincula os componentes
+        referenciarComponentes();
+
+        // Guarda a instância e a referência do BD
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference();
+
+        carregarDadosUsuario();
+
+    } // fecha onCreate
+
+    private void carregarDadosUsuario() {
+        // Listener de acesso ao BD
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String usuario = TelaPrincipal.usuarioInformado;
+                String senha = snapshot.child("usuario").child(usuario).child("senha").getValue().toString();
+                String idade = snapshot.child("usuario").child(usuario).child("idade").getValue().toString();
+
+                String dados = "Bem-vindo(a) " + usuario;
+                dados += "\n\nIdade: " + idade;
+                dados += "\nSenha: " + senha;
+
+                // Mostra os dados na tela
+                txtUsuario.setText(dados);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //
+            }
+        });
+    }
+
+    private void referenciarComponentes() {
+        txtUsuario = findViewById(R.id.txtUsuario);
+    }
+}
+
+
+
+<!-- TELA CADASTRO (XML) -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingLeft="75dp"
+    android:paddingRight="75dp"
+    android:background="@color/grafite"
+    tools:context=".TelaCadastro">
+
+    <ImageView
+        android:src="@drawable/cadastro_firebase"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/cinza"
+        android:text="@string/txt_usuario" />
+
+    <EditText
+        android:id="@+id/edtUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/cinza"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="18sp"
+        android:textColor="@color/cinza"
+        android:text="@string/txt_senha" />
+
+    <EditText
+        android:id="@+id/edtSenha"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/cinza"
+        android:inputType="textWebPassword" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="18sp"
+        android:textColor="@color/cinza"
+        android:text="@string/txt_idade" />
+
+    <EditText
+        android:id="@+id/edtIdade"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/cinza"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/btnCadastrar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="35dp"
+        android:background="@color/amarelo"
+        android:textColor="@color/grafite"
+        android:textSize="18sp"
+        android:text="@string/btn_cadastrar" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+// TELA CADASTRO (JAVA)
+package com.marneicardoso.cadastrofirebase;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+public class TelaCadastro extends AppCompatActivity {
+
+    // Atributos
+    EditText edtUsuario, edtSenha, edtIdade;
+    Button btnCadastrar;
+
+    // Banco de Dado Firebase
+    FirebaseDatabase database;
+    DatabaseReference reference;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tela_cadastro);
+        getSupportActionBar().hide();
+
+        // Vincula os componentes
+        referenciarComponentes();
+
+        // Coloca o foco no campo Usuário
+        edtUsuario.requestFocus();
+
+        // Guarda a instância e a referência do BD
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference();
+
+        // Listener do botão
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                verificarPreenchimento();
+            }
+        });
+
+    } // fecha o método onCreate
+
+    private void verificarPreenchimento() {
+        // Guarda os valores informadso na tela
+        String usuario = edtUsuario.getText().toString().toLowerCase();
+        String senha = edtSenha.getText().toString();
+        String idade = edtIdade.getText().toString();
+
+        // Se o usuário NÃO foi preenchido
+        if (usuario.isEmpty()) {
+            // Coloca o cursor no campo Usuário
+            edtUsuario.requestFocus();
+            Toast.makeText(this, "Informe o usuário", Toast.LENGTH_LONG).show();
+
+            // Não deixa seguir o código
+            return;
+        }
+
+        // Se a senha NÃO foi preenchida
+        if (senha.isEmpty()) {
+            // Coloca o cursor no campo Senha
+            edtSenha.requestFocus();
+            Toast.makeText(this, "Informe a senha", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Se a idade NÃO foi preenchida
+        if (idade.isEmpty()) {
+            // Coloca o cursor no campo Senha
+            edtIdade.requestFocus();
+            Toast.makeText(this, "Informe a idade", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Converte a idade para inteiro
+        int _idade;
+        try {
+            _idade = Integer.parseInt(idade);
+
+            // Criptografa a senha
+            String _senha = Criptografia.criptografarMD5(senha);
+
+            cadastrarUsuario(usuario, _senha, _idade);
+
+        } catch (Exception e) {
+            Toast.makeText(this, "Informe apenas números", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void cadastrarUsuario(String usuario, String senha, int idade) {
+        // Listener de acesso ao BD
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                // Verifica se o usuário já existe
+                if (snapshot.child("usuario").child(usuario).getValue() == null) {
+                    // Cria os Nodes dentro da tabela usuario
+                    reference.child("usuario").child(usuario).child("senha").setValue(senha);
+                    reference.child("usuario").child(usuario).child("idade").setValue(idade);
+
+                    // Mostra a mensagem de sucesso
+                    Toast.makeText(TelaCadastro.this, "Usuário cadastrado: " + usuario, Toast.LENGTH_LONG).show();
+                    abrirTelaPrincipal();
+
+                } else {
+                    Toast.makeText(TelaCadastro.this, "Usuário já existe", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //
+            }
+        });
+    }
+
+    private void abrirTelaPrincipal() {
+        startActivity(new Intent(this, TelaPrincipal.class));
+    }
+
+    private void referenciarComponentes() {
+        edtUsuario = findViewById(R.id.edtUsuario);
+        edtSenha = findViewById(R.id.edtSenha);
+        edtIdade = findViewById(R.id.edtIdade);
+        btnCadastrar = findViewById(R.id.btnCadastrar);
+    }
+}
+
+
+
+// CRIPTOGRAFIA (JAVA)
+package com.marneicardoso.cadastrofirebase;
+
+import java.security.MessageDigest;
+
+public class Criptografia {
+
+    public static String criptografarMD5(String valor) {
+
+        // Tenta fazer a criptografia
+        try {
+            MessageDigest mensagem = MessageDigest.getInstance("md5");
+            mensagem.update(valor.getBytes());
+
+            byte[] bytes = mensagem.digest();
+            StringBuilder builder = new StringBuilder();
+
+            for (int i = 0; i < bytes.length; i++) {
+                builder.append(String.format("%02x", bytes[i]));
+            }
+
+            return builder.toString();
+
+        } catch (Exception e) {
+            return "Erro ao criptografar: " + e.getStackTrace();
+        }
+    }
+}
+
+
